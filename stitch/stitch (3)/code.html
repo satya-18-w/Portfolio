@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Skills Playground | Satyajit Samal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#030014",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(236, 91, 19, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(236, 91, 19, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(236, 91, 19, 0.4);
+        }
+        .particle-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(236, 91, 19, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-primary/20 px-6 md:px-20 py-4 sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">deployed_code</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Satyajit Samal</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Projects</a>
+<a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary" href="#">Playground</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Contact</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="Professional portrait of Satyajit Samal" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrN929QW7mAh-QVtOkdoKknwnVBoU35iszR3wWP_XP18DaELC3rdhdhvZ7FKY4ugOb6ZB_OIEcn1k13b4xfpqRCqUPGvuN512a9QQQ0yaA8DEAzAgTO_p_j8w0U_o3ror58zHQWk03KoHUOhjONCYS5DPyGlHwt-WOZzuCTnwBTNM7auFK6AzL2elkbU_IzjhbsqDbmuaERZlhrF2mtSjVhJ7LAcgk_9th0QCJDterRmD4FMWYXRXe86f8awIOrkAaNIuf1YC1nuE");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- Hero Content -->
+<div class="px-6 md:px-20 pt-12 pb-6 flex flex-col items-center text-center relative z-10 pointer-events-none">
+<h1 class="text-slate-900 dark:text-white text-4xl md:text-6xl font-black leading-tight tracking-tight mb-4">
+                    Skills <span class="text-primary">Playground</span>
+</h1>
+<p class="text-slate-600 dark:text-primary/70 text-lg md:text-xl max-w-2xl font-normal leading-normal">
+                    A digital universe of interactive technologies and frameworks. Drag, explore, and interact with my ecosystem.
+                </p>
+</div>
+<!-- Interactive Canvas Area -->
+<div class="flex-1 relative min-h-[600px] w-full particle-bg">
+<!-- Instruction Overlay -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-center px-4">
+<div class="bg-white/10 dark:bg-primary/10 backdrop-blur-md px-6 py-3 rounded-full border border-primary/30 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary animate-bounce">mouse</span>
+<p class="text-slate-900 dark:text-white text-sm font-medium">Drag icons to interact with the physics engine</p>
+</div>
+</div>
+<!-- Floating Components (Simulated positions for UI layout) -->
+<!-- Go -->
+<div class="absolute top-[10%] left-[15%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 active:scale-95 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">terminal</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Go</p>
+</div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30">
+<div class="bg-slate-900 text-white text-[10px] p-2 rounded-lg whitespace-nowrap border border-primary/50">
+                            High performance backend systems
+                        </div>
+</div>
+</div>
+<!-- Python -->
+<div class="absolute top-[40%] left-[5%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">code_blocks</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Python</p>
+</div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30">
+<div class="bg-slate-900 text-white text-[10px] p-2 rounded-lg whitespace-nowrap border border-primary/50">
+                            Data Science &amp; Automation
+                        </div>
+</div>
+</div>
+<!-- Docker -->
+<div class="absolute top-[15%] left-[45%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300 border-primary/40 bg-primary/10">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">box</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Docker</p>
+</div>
+</div>
+<!-- Jenkins -->
+<div class="absolute top-[65%] left-[12%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">settings_input_component</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Jenkins</p>
+</div>
+</div>
+<!-- Kubernetes -->
+<div class="absolute top-[35%] left-[30%] group cursor-move scale-125">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300 border-primary shadow-primary/30">
+<div class="w-20 h-20 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-5xl">hub</span>
+</div>
+<p class="text-white text-sm font-bold text-center">Kubernetes</p>
+</div>
+</div>
+<!-- PostgreSQL -->
+<div class="absolute top-[60%] left-[40%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">database</span>
+</div>
+<p class="text-white text-xs font-bold text-center">PostgreSQL</p>
+</div>
+</div>
+<!-- Redis -->
+<div class="absolute top-[10%] left-[75%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">memory</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Redis</p>
+</div>
+</div>
+<!-- React -->
+<div class="absolute top-[40%] left-[65%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">dynamic_form</span>
+</div>
+<p class="text-white text-xs font-bold text-center">React</p>
+</div>
+</div>
+<!-- Node.js -->
+<div class="absolute top-[70%] left-[70%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">javascript</span>
+</div>
+<p class="text-white text-xs font-bold text-center">Node.js</p>
+</div>
+</div>
+<!-- TensorFlow -->
+<div class="absolute top-[30%] left-[85%] group cursor-move scale-110">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">psychology</span>
+</div>
+<p class="text-white text-xs font-bold text-center">TensorFlow</p>
+</div>
+</div>
+<!-- LangGraph -->
+<div class="absolute top-[75%] left-[88%] group cursor-move">
+<div class="glass-card rounded-xl p-6 glow-effect transition-transform hover:scale-110 duration-300">
+<div class="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">account_tree</span>
+</div>
+<p class="text-white text-xs font-bold text-center">LangGraph</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Sidebar / Skills List Navigation -->
+<aside class="fixed left-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4 z-40">
+<div class="flex flex-col gap-2 bg-white/5 dark:bg-black/20 backdrop-blur-lg p-4 rounded-2xl border border-primary/20">
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+<p class="text-sm font-medium">All Skills</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 hover:bg-primary/10 rounded-xl transition-colors text-slate-400">
+<span class="material-symbols-outlined">storage</span>
+<p class="text-sm font-medium">Backend</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 hover:bg-primary/10 rounded-xl transition-colors text-slate-400">
+<span class="material-symbols-outlined">cloud_done</span>
+<p class="text-sm font-medium">DevOps</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 hover:bg-primary/10 rounded-xl transition-colors text-slate-400">
+<span class="material-symbols-outlined">auto_awesome</span>
+<p class="text-sm font-medium">AI &amp; ML</p>
+</div>
+<hr class="border-primary/20 my-2"/>
+<div class="flex items-center gap-3 px-3 py-2 hover:bg-primary/10 rounded-xl transition-colors text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<p class="text-sm font-medium">Profile</p>
+</div>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="p-6 md:px-20 border-t border-slate-200 dark:border-primary/20 bg-background-light dark:bg-background-dark/50 z-10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">© 2024 Satyajit Samal. Building the future of web scale.</p>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-widest">Available for new opportunities</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

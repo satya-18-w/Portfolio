@@ -1,0 +1,58 @@
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ─── Build Output ─────────────────────────────────────────────────────────────
+dist/
+dist-ssr/
+build/
+
+# ─── Vite Cache ───────────────────────────────────────────────────────────────
+.vite/
+vite.config.js.timestamp-*
+
+# ─── Environment Variables ────────────────────────────────────────────────────
+# Contains sensitive API keys (EmailJS, etc.) – never commit these!
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# ─── Editor & OS Files ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+.idea/
+.vscode/settings.json
+*.suo
+*.user
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Testing ──────────────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── 3D Models (large binary assets — host these on a CDN instead) ────────────
+# Uncomment the line below if you DON'T want to track your GLB/GLTF models:
+# public/models/*.glb
+# public/models/*.gltf
+# public/models/*.bin
+
+# ─── Antigravity AI Config (local dev assistant — not for GitHub) ─────────────
+.antigravity/
+.gemini/
+
+# ─── Misc ─────────────────────────────────────────────────────────────────────
+*.local
+*.tsbuildinfo

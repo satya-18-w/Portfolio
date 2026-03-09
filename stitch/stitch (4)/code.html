@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact | Satyajit Samal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#030014",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .grid-background {
+            background-image: linear-gradient(to right, rgba(236, 91, 19, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(236, 91, 19, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .neon-border {
+            box-shadow: 0 0 5px rgba(236, 91, 19, 0.2), inset 0 0 5px rgba(236, 91, 19, 0.1);
+            border: 1px solid rgba(236, 91, 19, 0.3);
+        }
+        .neon-border:focus {
+            box-shadow: 0 0 15px rgba(236, 91, 19, 0.5), inset 0 0 8px rgba(236, 91, 19, 0.2);
+            border-color: #ec5b13;
+            outline: none;
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(236, 91, 19, 0.6);
+        }
+        .social-card:hover {
+            box-shadow: 0 0 20px rgba(236, 91, 19, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
+<!-- Animated Grid Overlay -->
+<div class="fixed inset-0 grid-background pointer-events-none"></div>
+<div class="fixed inset-0 bg-gradient-to-b from-transparent via-background-dark/50 to-background-dark pointer-events-none"></div>
+<div class="relative flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="w-full border-b border-primary/20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/40">
+<span class="material-symbols-outlined text-primary text-2xl">rocket_launch</span>
+</div>
+<h2 class="text-xl font-black tracking-tighter uppercase text-slate-900 dark:text-slate-100">Satyajit <span class="text-primary">Samal</span></h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Work</a>
+<a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">About</a>
+<a class="text-sm font-bold uppercase tracking-widest text-primary" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="size-10 rounded-full border border-primary/30 flex items-center justify-center hover:bg-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary">light_mode</span>
+</button>
+<button class="hidden lg:flex px-6 py-2 bg-primary text-white font-bold rounded-lg hover:shadow-[0_0_20px_rgba(236,91,19,0.5)] transition-all">
+                        HIRE ME
+                    </button>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-12 lg:py-24 grid lg:grid-cols-2 gap-16 items-start relative">
+<!-- Left Side: Copy and Socials -->
+<div class="flex flex-col gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-primary">Available for new projects</span>
+</div>
+<div>
+<h1 class="text-5xl lg:text-7xl font-black leading-none tracking-tight text-slate-900 dark:text-white mb-6">
+                        LET'S BUILD THE <span class="text-primary glow-text">FUTURE</span> TOGETHER.
+                    </h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
+                        Currently focusing on immersive digital experiences. Drop a line for collaborations or just to say hi.
+                    </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+<a class="social-card flex flex-col gap-3 p-6 rounded-xl bg-background-light dark:bg-slate-900/40 border border-primary/10 backdrop-blur-sm group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">code</span>
+<span class="text-xs font-bold uppercase tracking-widest opacity-60">GitHub</span>
+</a>
+<a class="social-card flex flex-col gap-3 p-6 rounded-xl bg-background-light dark:bg-slate-900/40 border border-primary/10 backdrop-blur-sm group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">share</span>
+<span class="text-xs font-bold uppercase tracking-widest opacity-60">LinkedIn</span>
+</a>
+<a class="social-card flex flex-col gap-3 p-6 rounded-xl bg-background-light dark:bg-slate-900/40 border border-primary/10 backdrop-blur-sm group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">alternate_email</span>
+<span class="text-xs font-bold uppercase tracking-widest opacity-60">Email</span>
+</a>
+</div>
+<div class="mt-8 pt-8 border-t border-primary/10">
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full border-2 border-primary/30 p-1">
+<img alt="Satyajit Samal professional profile portrait" class="size-full rounded-full grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="Close-up portrait of Satyajit Samal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApqQ8yqQB0nauEzZ8Wth90QIU7eUZNfuu-HExxS4uYRD5x0jvmtO4YVzpTOSj0y1l5qmZcoUYaVjTSHd5ulDMPb-Sd4Uif9ZrzVfYL2W_Si6Lbosk-MHmGVN4jvBYBr8At8hm0z_a0FCJrbKuTuoYZRHOKKaNicNe6JhZIRvGgm3oOAncltnqkRPbuXM7z4yt1wdslhk3rAlYWlwrDkRSdlrUclO5HXvazF_0lf3AWgXYkOlOItwSQmldvGkpsHqmGK-6owERLKZI"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Satyajit Samal</p>
+<p class="text-sm text-primary/80 font-medium">Creative Developer &amp; UI/UX Specialist</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: The Contact Form -->
+<div class="relative">
+<!-- Decorative Elements -->
+<div class="absolute -top-10 -right-10 size-40 bg-primary/20 blur-[100px] rounded-full"></div>
+<form class="relative p-8 lg:p-12 rounded-2xl bg-white/5 dark:bg-slate-900/20 border border-primary/20 backdrop-blur-xl flex flex-col gap-8">
+<div class="space-y-6">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Full Name</label>
+<input class="w-full neon-border bg-background-light/50 dark:bg-slate-800/30 rounded-xl px-5 py-4 text-slate-900 dark:text-white placeholder:opacity-30 transition-all font-medium" placeholder="John Doe" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Email Protocol</label>
+<input class="w-full neon-border bg-background-light/50 dark:bg-slate-800/30 rounded-xl px-5 py-4 text-slate-900 dark:text-white placeholder:opacity-30 transition-all font-medium" placeholder="john@nebula.io" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Your Message</label>
+<textarea class="w-full neon-border bg-background-light/50 dark:bg-slate-800/30 rounded-xl px-5 py-4 text-slate-900 dark:text-white placeholder:opacity-30 transition-all font-medium resize-none" placeholder="Transmission details..." rows="4"></textarea>
+</div>
+</div>
+<button class="group relative flex items-center justify-center gap-3 w-full bg-primary py-5 rounded-xl text-white font-black uppercase tracking-[0.2em] shadow-[0_0_30px_rgba(236,91,19,0.3)] hover:shadow-[0_0_50px_rgba(236,91,19,0.5)] transition-all overflow-hidden" type="submit">
+<span class="relative z-10">Initialize Transmission</span>
+<span class="material-symbols-outlined relative z-10 group-hover:translate-x-2 transition-transform">bolt</span>
+<!-- Button Glow Effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+</button>
+<p class="text-center text-[10px] uppercase tracking-widest opacity-40 font-bold">
+                        Encrypted Connection Secured via SSL-v3
+                    </p>
+</form>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 border-t border-primary/10 mt-12 bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-sm relative z-10">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-sm font-medium opacity-60">© 2024 SATYAJIT SAMAL. ALL SYSTEMS OPERATIONAL.</p>
+<div class="flex items-center gap-8">
+<a class="text-xs font-bold tracking-widest uppercase hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-xs font-bold tracking-widest uppercase hover:text-primary transition-colors" href="#">Status</a>
+<a class="text-xs font-bold tracking-widest uppercase hover:text-primary transition-colors" href="#">Terminal</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
