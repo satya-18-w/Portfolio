@@ -5,9 +5,7 @@ import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Loader from './components/ui/Loader';
 import Navbar from './components/ui/Navbar';
 import NeonSwitch from './components/ui/NeonSwitch';
-import { Canvas } from '@react-three/fiber';
-import FloatingParticles from './components/three/FloatingParticles';
-import FloatingShapes from './components/three/FloatingShapes';
+import Footer from './components/ui/Footer';
 
 const HeroSection = lazy(() => import('./components/sections/HeroSection'));
 const SkillsSection = lazy(() => import('./components/sections/SkillsSection'));
@@ -27,16 +25,6 @@ function AppContent() {
 
     return (
         <div className="relative noise-overlay">
-            {/* 3D Global Background Canvas */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[10, 10, 10]} intensity={1} />
-                    <FloatingParticles count={200} />
-                    <FloatingShapes />
-                </Canvas>
-            </div>
-
             <AnimatePresence mode="wait">
                 {loading && <Loader key="loader" />}
             </AnimatePresence>
@@ -59,6 +47,7 @@ function AppContent() {
                     <Suspense fallback={null}>
                         <ContactSection />
                     </Suspense>
+                    <Footer />
                     <NeonSwitch />
                 </>
             )}

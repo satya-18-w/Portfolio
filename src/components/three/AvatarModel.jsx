@@ -24,11 +24,14 @@ export default function AvatarModel({ mousePos }) {
         if (!group.current) return;
 
         // Gentle floating bob
-        group.current.position.y = Math.sin(state.clock.elapsedTime * 1.2) * 0.06;
+        group.current.position.y = -0.9 + Math.sin(state.clock.elapsedTime * 1.2) * 0.1;
+
+        // Offset to the right slightly to avoid central text blockage
+        group.current.position.x = 2.2;
 
         // Subtle mouse-tracking rotation
-        const targetRotY = mousePos.current.x * 0.3;
-        group.current.rotation.y += (targetRotY - group.current.rotation.y) * 0.04;
+        const targetRotY = mousePos.current.x * 0.4;
+        group.current.rotation.y += (targetRotY - group.current.rotation.y) * 0.05;
     });
 
     return (

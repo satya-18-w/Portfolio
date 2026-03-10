@@ -1,178 +1,306 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
-import TiltCard from '../ui/TiltCard';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const SKILL_CATEGORIES = [
-    {
-        id: '01',
-        title: 'AI / ML',
-        icon: (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-        ),
-        skills: ['Python', 'PyTorch', 'TensorFlow', 'LangChain', 'OpenAI API', 'HuggingFace'],
-        color: '#00F5FF'
-    },
-    {
-        id: '02',
-        title: 'Backend Engineering',
-        icon: (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-            </svg>
-        ),
-        skills: ['Go', 'Node.js', 'gRPC', 'REST APIs', 'WebSockets', 'Gin', 'Express'],
-        color: '#8B5CF6'
-    },
-    {
-        id: '03',
-        title: 'Frontend Development',
-        icon: (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-        ),
-        skills: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'Three.js', 'Framer Motion'],
-        color: '#00F5FF'
-    },
-    {
-        id: '04',
-        title: 'Database Systems',
-        icon: (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-            </svg>
-        ),
-        skills: ['PostgreSQL', 'Redis', 'MongoDB', 'MySQL', 'DynamoDB', 'Elasticsearch'],
-        color: '#8B5CF6'
-    },
-    {
-        id: '05',
-        title: 'DevOps & Cloud',
-        icon: (
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-            </svg>
-        ),
-        skills: ['Docker', 'Kubernetes', 'AWS', 'GitHub Actions', 'Terraform', 'Linux', 'Git'],
-        color: '#10B981'
-    },
+gsap.registerPlugin(ScrollTrigger);
+
+const CATEGORIES = ['All Skills', 'Backend', 'DevOps', 'AI & ML', 'Frontend'];
+
+const SKILLS = [
+    { name: 'Go', category: 'Backend', icon: '⚡', level: 95 },
+    { name: 'Python', category: 'Backend', icon: '🐍', level: 90 },
+    { name: 'Node.js', category: 'Backend', icon: '⬢', level: 80 },
+    { name: 'PostgreSQL', category: 'Backend', icon: '🗄', level: 85 },
+    { name: 'Redis', category: 'Backend', icon: '⚙', level: 80 },
+    { name: 'gRPC', category: 'Backend', icon: '🔗', level: 78 },
+    { name: 'Kubernetes', category: 'DevOps', icon: '☸', level: 82 },
+    { name: 'Docker', category: 'DevOps', icon: '🐳', level: 92 },
+    { name: 'AWS', category: 'DevOps', icon: '☁', level: 85 },
+    { name: 'Jenkins', category: 'DevOps', icon: '🤖', level: 72 },
+    { name: 'Kafka', category: 'DevOps', icon: '📨', level: 75 },
+    { name: 'LangGraph', category: 'AI & ML', icon: '🔗', level: 88 },
+    { name: 'PyTorch', category: 'AI & ML', icon: '🔥', level: 82 },
+    { name: 'TensorFlow', category: 'AI & ML', icon: '🧠', level: 78 },
+    { name: 'Transformers', category: 'AI & ML', icon: '🤗', level: 85 },
+    { name: 'React', category: 'Frontend', icon: '⚛', level: 88 },
+    { name: 'TypeScript', category: 'Frontend', icon: 'TS', level: 82 },
+    { name: 'Three.js', category: 'Frontend', icon: '△', level: 70 },
+    { name: 'Tailwind', category: 'Frontend', icon: '🎨', level: 90 },
 ];
 
-function SkillCard({ category, idx }) {
+/* ── TOYFIGHT BRUTALIST POP: Draggable floating blocky cards ─────────────────────────── */
+function CyberSkills({ theme }) {
+    const [activeCategory, setActiveCategory] = useState('All Skills');
+    const filtered = activeCategory === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === activeCategory);
+    const constraintsRef = useRef(null);
+    const sectionRef = useRef(null);
+    const headerRef = useRef(null);
+
+    useEffect(() => {
+        let ctx = gsap.context(() => {
+            gsap.fromTo(headerRef.current,
+                { opacity: 0, y: 100, rotateX: -30 },
+                {
+                    opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: "power4.out",
+                    scrollTrigger: { trigger: sectionRef.current, start: "top 80%" }
+                }
+            );
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className={`${idx === 4 ? 'md:col-span-2 lg:col-span-2' : ''}`}
-        >
-            <TiltCard
-                className="group relative flex flex-col p-6 rounded-2xl h-full"
-                style={{
-                    background: 'linear-gradient(145deg, rgba(15,15,35,0.65) 0%, rgba(6,6,17,0.92) 100%)',
-                    border: `1px solid rgba(255,255,255,0.06)`,
-                }}
-                intensity={8}
-            >
-                {/* Top corner accent dot */}
-                <div
-                    className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full opacity-60"
-                    style={{ background: category.color }}
-                />
+        <section id="skills" ref={sectionRef} className="relative py-32 overflow-hidden" style={{ background: theme.bg, color: theme.text }}>
 
-                {/* Icon + Title */}
-                <div className="flex items-center gap-3 mb-5">
-                    <div
-                        className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                        style={{ background: `${category.color}18`, color: category.color }}
-                    >
-                        {category.icon}
-                    </div>
-                    <div>
-                        <span className="text-[10px] font-mono text-gray-600 tracking-[0.2em]">{category.id}</span>
-                        <h3 className="text-base font-display font-bold text-white">{category.title}</h3>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <div ref={headerRef} className="text-left md:text-center mb-16 md:mb-24">
+                    <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.85] z-10 relative" style={{ fontFamily: theme.fontHeading }}>
+                        Skills{' '}
+                        <span className="inline-block shrink-0 mt-4 px-6 md:px-8 py-2 border-4 border-black rounded-full shadow-[8px_8px_0px_#000] rotate-2 bg-[#FAEDCD] text-wrap">
+                            Playground
+                        </span>
+                    </h2>
+                    <div className="mt-16 md:mt-20 lg:mt-28 relative z-20">
+                        <p className="text-black text-sm md:text-xl font-bold max-w-xl mx-auto border-2 border-black inline-block px-6 py-2 rounded-full shadow-[4px_4px_0px_#000] bg-white">
+                            Toss the cards around. Watch them bounce.
+                        </p>
                     </div>
                 </div>
 
-                {/* Skill tags */}
-                <div className="flex flex-wrap gap-2 mt-auto">
-                    {category.skills.map((skill, i) => (
-                        <motion.span
-                            key={skill}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: idx * 0.1 + i * 0.04 }}
-                            className="text-xs font-medium px-3 py-1.5 rounded-full"
-                            style={{
-                                background: `rgba(255,255,255,0.03)`,
-                                border: `1px solid ${category.color}25`,
-                                color: '#CBD5E1',
-                            }}
-                        >
-                            {skill}
-                        </motion.span>
-                    ))}
-                </div>
+                <div className="flex flex-col lg:flex-row gap-8 mt-12">
+                    {/* Filter Sidebar */}
+                    <div className="flex flex-row lg:flex-col gap-3 min-w-[200px] shrink-0 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide">
+                        {CATEGORIES.map(cat => (
+                            <button key={cat} onClick={() => setActiveCategory(cat)}
+                                className={`flex items-center gap-3 px-6 py-4 rounded-full text-sm lg:text-base font-black uppercase tracking-widest text-left transition-all border-4 border-black whitespace-nowrap lg:whitespace-normal
+                                    ${activeCategory === cat ? 'shadow-[4px_4px_0px_#000] translate-y-0 translate-x-0' : 'shadow-[8px_8px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:translate-x-1'}`}
+                                style={{
+                                    background: activeCategory === cat ? '#E0FBFC' : '#fff',
+                                    color: '#000'
+                                }}>
+                                <span className="text-xl">
+                                    {cat === 'All Skills' ? '✦' : cat === 'Backend' ? '⚙' : cat === 'DevOps' ? '☁' : cat === 'AI & ML' ? '🧠' : '🎨'}
+                                </span>
+                                <span>{cat}</span>
+                            </button>
+                        ))}
+                    </div>
 
-                {/* Bottom accent line on hover */}
-                <div
-                    className="absolute bottom-0 left-4 right-4 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, ${category.color}60, transparent)` }}
-                />
-            </TiltCard>
-        </motion.div>
+                    {/* Grid/Physics container */}
+                    <div ref={constraintsRef} className="flex-1 relative min-h-[520px] rounded-[3rem] border-4 border-black shadow-[16px_16px_0px_#000] overflow-hidden bg-white">
+                        {/* Internal grid pattern */}
+                        <div className="absolute inset-0 pointer-events-none opacity-20"
+                            style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6 p-8 relative z-10">
+                            <AnimatePresence mode="popLayout">
+                                {filtered.map((skill, i) => {
+                                    const randomRot = (i % 3 === 0) ? -4 : (i % 2 === 0) ? 4 : 0;
+                                    const randomY = (i % 2 === 0) ? [0, -10, 0] : [0, 8, 0];
+                                    const cardColor = i % 3 === 0 ? '#E2D1F9' : i % 2 === 0 ? '#FEFAE0' : '#FAEDCD';
+
+                                    return (
+                                        <motion.div key={`${skill.name}-${activeCategory}`}
+                                            drag dragConstraints={constraintsRef} dragElastic={0.2} dragMomentum={true}
+                                            whileDrag={{ scale: 1.15, rotateZ: randomRot * 2, zIndex: 100, boxShadow: '12px 12px 0px rgba(0,0,0,1)' }}
+                                            whileHover={{ scale: 1.05, rotateZ: randomRot, zIndex: 50 }}
+                                            initial={{ opacity: 0, scale: 0.5, y: 40 }}
+                                            animate={{ opacity: 1, scale: 1, y: randomY, transition: { y: { repeat: Infinity, duration: 4 + (i * 0.2), ease: "easeInOut" } } }}
+                                            exit={{ opacity: 0, scale: 0.3 }}
+                                            transition={{ duration: 0.5, delay: i * 0.04, type: 'spring', stiffness: 200, damping: 15 }}
+                                            className="flex flex-col items-center justify-center gap-4 h-40 rounded-4xl border-4 border-black cursor-grab active:cursor-grabbing select-none relative group bg-white shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000]"
+                                            style={{ transformStyle: 'preserve-3d' }}>
+
+                                            {/* Hover fill */}
+                                            <div className="absolute inset-0 rounded-[1.7rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: cardColor }} />
+
+                                            <span className="text-5xl translate-z-[10px] drop-shadow-md relative z-10">{skill.icon}</span>
+                                            <span className="text-sm font-black uppercase tracking-widest text-center translate-z-[20px] relative z-10 text-black">{skill.name}</span>
+
+                                            <div className="w-20 h-2 rounded-full border-2 border-black translate-z-[15px] bg-white relative z-10 overflow-hidden">
+                                                <div className="h-full bg-black border-r-2 border-black" style={{ width: `${skill.level}%` }} />
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </AnimatePresence>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 }
 
-export default function SkillsSection() {
-    const { theme } = useTheme();
-
+/* ── MINIMAL: Orange icon grid with proficiency dots ──────────────── */
+function MinimalSkills({ theme }) {
+    const [active, setActive] = useState('All Skills');
+    const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
     return (
-        <section
-            id="skills"
-            className="min-h-screen w-full relative py-24 lg:py-32 snap-section overflow-hidden"
-            style={{ background: 'var(--bg-dark)' }}
-        >
-            {/* Background Glow */}
-            <div className="absolute inset-0 pointer-events-none z-0">
-                <div
-                    className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[150px] opacity-[0.08]"
-                    style={{ background: theme.primary }}
-                />
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 w-full">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    className="text-center mb-16 lg:mb-20"
-                >
-                    <span className="block mb-4 text-xs font-mono tracking-[0.3em] uppercase" style={{ color: theme.secondary }}>
-                        Capabilities
-                    </span>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white tracking-tighter">
-                        Technical <span className="gradient-text">Arsenal</span>
+        <section id="skills" className="py-28" style={{ background: theme.bgAlt, color: theme.text }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-16">
+                <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
+                    <h2 className="text-7xl md:text-9xl font-black tracking-tighter" style={{ fontFamily: theme.fontHeading, color: theme.text }}>
+                        Core <span style={{ color: theme.primary }}>Expertise</span>
                     </h2>
-                    <p className="mt-4 text-gray-500 text-base max-w-md mx-auto leading-relaxed">
-                        A cross-disciplinary toolkit spanning AI/ML, distributed systems, and modern web development.
-                    </p>
+                    <p className="mt-3 text-lg" style={{ color: theme.textMuted }}>Advanced technical proficiencies across the full engineering stack.</p>
+                    <div className="h-px mt-6 w-16" style={{ background: theme.primary }} />
                 </motion.div>
-
-                {/* Skills Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {SKILL_CATEGORIES.map((category, idx) => (
-                        <SkillCard key={category.id} category={category} idx={idx} />
+                {/* Category tabs */}
+                <div className="flex gap-3 flex-wrap mb-10">
+                    {CATEGORIES.map(cat => (
+                        <button key={cat} onClick={() => setActive(cat)}
+                            className="px-5 py-2 rounded-full text-sm font-bold border-2 transition-all hover:scale-105"
+                            style={{ background: active === cat ? theme.primary : 'transparent', borderColor: active === cat ? theme.primary : `${theme.textMuted}50`, color: active === cat ? '#fff' : theme.textMuted }}>
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {filtered.map((skill, i) => (
+                        <motion.div key={skill.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+                            className="p-5 rounded-2xl flex items-center gap-4 group transition-all hover:shadow-lg"
+                            style={{ background: 'white', border: `2px solid ${theme.surfaceBorder}` }}
+                            onMouseEnter={e => e.currentTarget.style.borderColor = theme.primary}
+                            onMouseLeave={e => e.currentTarget.style.borderColor = theme.surfaceBorder}>
+                            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
+                                style={{ background: `${theme.primary}12` }}>{skill.icon}</div>
+                            <div className="flex-1">
+                                <div className="flex justify-between mb-1">
+                                    <span className="font-bold text-sm" style={{ color: theme.text }}>{skill.name}</span>
+                                    <span className="text-xs font-mono font-bold" style={{ color: theme.primary }}>{skill.level}%</span>
+                                </div>
+                                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: `${theme.primary}20` }}>
+                                    <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} transition={{ duration: 0.8, delay: i * 0.05 }}
+                                        className="h-full rounded-full" style={{ background: theme.primary }} />
+                                </div>
+                                <span className="text-[10px] mt-1 block" style={{ color: theme.textMuted }}>{skill.category}</span>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
         </section>
     );
+}
+
+/* ── TERMINAL: htop-style resource monitor ────────────────────────── */
+function TerminalSkills({ theme }) {
+    const [active, setActive] = useState('All Skills');
+    const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
+    return (
+        <section id="skills" className="py-20" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
+            <div className="max-w-4xl mx-auto px-6">
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+                    <p className="mb-1" style={{ color: theme.primary }}>$ skill_matrix --user=satyajit --format=htop</p>
+                    <p className="text-xs mb-6" style={{ color: theme.textMuted }}>Scanning neural stack... 19 modules loaded.</p>
+                    {/* htop-style header */}
+                    <div className="border rounded-t-lg overflow-hidden" style={{ borderColor: `${theme.primary}40` }}>
+                        <div className="px-4 py-2 flex items-center gap-2 border-b text-xs" style={{ background: 'rgba(0,255,65,0.06)', borderColor: `${theme.primary}30`, color: theme.primary }}>
+                            <div className="flex gap-1.5">{['#ff5f57', '#febc2e', '#28c840'].map(c => <div key={c} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />)}</div>
+                            SS_SKILL_MONITOR — htop 3.2.0 — 19 processes
+                        </div>
+                        {/* Filter tabs */}
+                        <div className="flex border-b text-xs" style={{ borderColor: `${theme.primary}20` }}>
+                            {CATEGORIES.map(cat => (
+                                <button key={cat} onClick={() => setActive(cat)}
+                                    className="px-4 py-2 transition-colors"
+                                    style={{ background: active === cat ? `${theme.primary}15` : 'transparent', color: active === cat ? theme.primary : theme.textMuted, borderRight: `1px solid ${theme.primary}20` }}>
+                                    {cat === 'All Skills' ? '[ALL]' : `[${cat.toUpperCase().replace(' & ', '+')}]`}
+                                </button>
+                            ))}
+                        </div>
+                        {/* Column headers */}
+                        <div className="px-4 py-2 flex gap-4 text-xs border-b" style={{ background: theme.primary, color: '#000', borderColor: `${theme.primary}40` }}>
+                            <span className="w-6">PID</span><span className="w-36">MODULE</span><span className="flex-1">PROFICIENCY_BAR</span><span className="w-12 text-right">%LOAD</span>
+                        </div>
+                        <AnimatePresence>
+                            {filtered.map((skill, i) => (
+                                <motion.div key={skill.name}
+                                    initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ delay: i * 0.03 }}
+                                    className="px-4 py-2 flex gap-4 items-center text-xs border-b transition-colors"
+                                    style={{ borderColor: `${theme.primary}10`, background: i % 2 === 0 ? 'rgba(0,255,65,0.02)' : 'transparent' }}>
+                                    <span className="w-6 opacity-50" style={{ color: theme.textMuted }}>{100 + i}</span>
+                                    <span className="w-36 font-bold" style={{ color: theme.primary }}>{skill.icon} {skill.name}</span>
+                                    <div className="flex-1 h-3 rounded-sm overflow-hidden" style={{ background: 'rgba(0,255,65,0.1)' }}>
+                                        <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} transition={{ duration: 1, delay: i * 0.04 }}
+                                            className="h-full relative" style={{ background: skill.level > 88 ? '#00ff41' : skill.level > 75 ? '#7fff00' : '#ffd700' }}>
+                                            <span className="absolute right-1 top-0 text-[8px] font-black text-black leading-3">{skill.level > 40 ? '█'.repeat(Math.floor(skill.level / 10)) : ''}</span>
+                                        </motion.div>
+                                    </div>
+                                    <span className="w-12 text-right font-bold" style={{ color: skill.level > 88 ? '#00ff41' : '#7fff00' }}>{skill.level}.0</span>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+                    <p className="mt-4 text-xs" style={{ color: `${theme.primary}50` }}>// Press [F5] to refresh · [q] to quit · CPU: 4.2% · RAM: 1.4GB</p>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
+
+/* ── BRUTALIST: Clean numbered list ──────────────────────────────── */
+function BrutalistSkills({ theme }) {
+    const [active, setActive] = useState('All Skills');
+    const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
+    return (
+        <section id="skills" className="py-24" style={{ background: theme.bg }}>
+            <div className="max-w-6xl mx-auto px-6 lg:px-16">
+                <div className="mb-10">
+                    <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-2"
+                        style={{ fontFamily: theme.fontHeading, color: theme.text }}>SKILLS</h2>
+                    <div className="h-1 w-20 mb-4" style={{ background: theme.primary }} />
+                    <p className="text-sm" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>Core engineering capabilities</p>
+                </div>
+                {/* Category filter */}
+                <div className="flex gap-2 flex-wrap mb-8">
+                    {CATEGORIES.map(cat => (
+                        <button key={cat} onClick={() => setActive(cat)}
+                            className="px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all"
+                            style={{
+                                background: active === cat ? theme.primary : 'transparent',
+                                color: active === cat ? '#000' : theme.textMuted,
+                                border: `1px solid ${active === cat ? theme.primary : `${theme.textMuted}30`}`,
+                                fontFamily: theme.fontMono,
+                            }}>
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+                {/* Clean list */}
+                <div style={{ borderTop: `1px solid ${theme.primary}20` }}>
+                    {filtered.map((skill, i) => (
+                        <motion.div key={skill.name}
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }}
+                            className="flex items-center justify-between py-4 px-2 group transition-all hover:bg-white/[0.02]"
+                            style={{ borderBottom: `1px solid ${theme.primary}15` }}>
+                            <div className="flex items-center gap-5">
+                                <span className="text-sm font-mono w-8 opacity-30" style={{ color: theme.textMuted }}>{String(i + 1).padStart(2, '0')}</span>
+                                <span className="text-xl">{skill.icon}</span>
+                                <span className="text-lg font-bold" style={{ color: theme.text, fontFamily: theme.fontHeading }}>{skill.name}</span>
+                                <span className="text-xs px-2 py-0.5 hidden sm:inline-block" style={{ color: theme.textMuted, fontFamily: theme.fontMono, border: `1px solid ${theme.primary}20` }}>{skill.category}</span>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="w-24 h-1 hidden sm:block" style={{ background: `${theme.primary}15` }}>
+                                    <div className="h-full" style={{ width: `${skill.level}%`, background: theme.primary, transition: 'width 0.6s ease' }} />
+                                </div>
+                                <span className="text-sm font-bold font-mono" style={{ color: theme.primary }}>{skill.level}%</span>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export default function SkillsSection() {
+    const { theme, themeKey } = useTheme();
+    if (themeKey === 'minimal') return <MinimalSkills theme={theme} />;
+    if (themeKey === 'terminal') return <TerminalSkills theme={theme} />;
+    if (themeKey === 'brutalist') return <BrutalistSkills theme={theme} />;
+    return <CyberSkills theme={theme} />;
 }
