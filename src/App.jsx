@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Loader from './components/ui/Loader';
 import Navbar from './components/ui/Navbar';
@@ -12,9 +12,12 @@ const SkillsSection = lazy(() => import('./components/sections/SkillsSection'));
 const ProjectsSection = lazy(() => import('./components/sections/ProjectsSection'));
 const JourneySection = lazy(() => import('./components/sections/JourneySection'));
 const ContactSection = lazy(() => import('./components/sections/ContactSection'));
+const MetaverseWorld = lazy(() => import('./components/three/metaverse/MetaverseWorld'));
 
 function AppContent() {
     const [loading, setLoading] = useState(true);
+    const { themeKey } = useTheme();
+    const isMetaverse = themeKey === 'metaverse';
 
     useSmoothScroll();
 
@@ -29,7 +32,16 @@ function AppContent() {
                 {loading && <Loader key="loader" />}
             </AnimatePresence>
 
-            {!loading && (
+            {!loading && isMetaverse && (
+                <>
+                    <Suspense fallback={null}>
+                        <MetaverseWorld />
+                    </Suspense>
+                    <NeonSwitch />
+                </>
+            )}
+
+            {!loading && !isMetaverse && (
                 <>
                     <Navbar />
                     <Suspense fallback={null}>

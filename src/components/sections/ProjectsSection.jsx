@@ -262,7 +262,7 @@ function ProjectCard({ project: p, index: i, theme }) {
 function MinimalProjects({ theme }) {
     return (
         <section id="projects" className="py-32 overflow-hidden" style={{ background: theme.bg, color: theme.text }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-16">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -309,7 +309,7 @@ function TerminalProjects({ theme }) {
     const p = PROJECTS[selected];
     return (
         <section id="projects" className="py-28" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
-            <div className="max-w-5xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-10">
                     <p style={{ color: theme.primary }}>$ ls -la ~/projects/</p>
                     <p className="mt-1 mb-4 text-sm" style={{ color: theme.textMuted }}>total {PROJECTS.length * 128}K   |   3 repositories found</p>
@@ -372,7 +372,7 @@ function TerminalProjects({ theme }) {
 function BasementProjects({ theme }) {
     return (
         <section id="projects" className="py-24 relative" style={{ background: theme.bg, color: theme.text }}>
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="mb-16 border-b pb-8" style={{ borderColor: theme.surfaceBorder }}>
                     <h2 className="text-[clamp(4rem,10vw,10rem)] font-black tracking-tighter leading-[0.85] uppercase"
                         style={{ fontFamily: theme.fontHeading }}>

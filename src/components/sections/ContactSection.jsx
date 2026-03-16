@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 
 export default function ContactSection() {
-    const { theme } = useTheme();
+    const { theme, themeKey } = useTheme();
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [focus, setFocus] = useState(null);
     const [submitted, setSubmitted] = useState(false);
@@ -13,6 +13,18 @@ export default function ContactSection() {
         setSubmitted(true);
         setTimeout(() => { setSubmitted(false); setForm({ name: '', email: '', message: '' }); }, 3000);
     };
+
+    const isLight = theme.sectionStyle === 'light';
+    const isPop = themeKey === 'cyber';
+    const isTerminal = themeKey === 'terminal';
+
+    // Theme-aware styling
+    const sectionBg = isLight ? theme.bgAlt : theme.bg;
+    const headingColor = isLight ? '#000' : theme.text;
+    const inputTextColor = isLight ? '#000' : theme.text;
+    const mutedColor = theme.textMuted;
+    const borderColor = isLight ? `${theme.primary}25` : 'rgba(255,255,255,0.06)';
+    const placeholderColor = isLight ? '#aaa' : '#334155';
 
     const stagger = {
         hidden: {},
@@ -30,11 +42,11 @@ export default function ContactSection() {
     return (
         <section
             id="contact"
-            className="h-screen w-screen relative overflow-hidden snap-section flex flex-col"
-            style={{ background: 'var(--bg-dark)' }}
+            className="min-h-screen w-full relative overflow-hidden flex flex-col"
+            style={{ background: sectionBg, color: headingColor }}
         >
             {/* Main content — centered */}
-            <div className="flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full px-6 sm:px-10 md:px-16">
+            <div className="flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
                     {/* Left — bold heading & info */}
                     <motion.div
@@ -44,11 +56,16 @@ export default function ContactSection() {
                         viewport={{ once: true }}
                         className="flex flex-col justify-center"
                     >
-                        <motion.span variants={fadeUp} className="section-label block mb-3">Contact</motion.span>
+                        <motion.span variants={fadeUp}
+                            className="text-[11px] font-semibold tracking-[0.2em] uppercase block mb-3"
+                            style={{ color: theme.primary, fontFamily: theme.fontMono }}>
+                            Contact
+                        </motion.span>
 
                         <motion.h2
                             variants={fadeUp}
-                            className="display-heading text-5xl sm:text-6xl md:text-7xl text-white uppercase tracking-tighter mb-6 leading-[0.9]"
+                            className="text-5xl sm:text-6xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-[0.9]"
+                            style={{ fontFamily: theme.fontHeading, color: headingColor }}
                         >
                             Let's Get<br />In Touch
                         </motion.h2>
@@ -56,14 +73,15 @@ export default function ContactSection() {
                         <motion.a
                             variants={fadeUp}
                             href="mailto:satyajit@iiit-bh.ac.in"
-                            className="text-sm sm:text-base text-slate-400 hover:text-white transition-colors duration-300 mb-6 block"
+                            className="text-sm sm:text-base transition-colors duration-300 mb-6 block"
+                            style={{ color: mutedColor }}
                         >
                             satyajit@iiit-bh.ac.in
                         </motion.a>
 
                         <motion.div variants={fadeUp} className="flex items-center gap-3 mb-8">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-xs text-slate-500">Available for internships & collaborations</span>
+                            <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: theme.primary }} />
+                            <span className="text-xs" style={{ color: mutedColor }}>Available for internships & collaborations</span>
                         </motion.div>
 
                         <motion.div variants={fadeUp} className="flex gap-3">
@@ -76,8 +94,8 @@ export default function ContactSection() {
                                     href={l.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-[10px] font-semibold tracking-wider uppercase text-slate-600 hover:text-white px-4 py-2 rounded-full transition-all duration-300"
-                                    style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+                                    className="text-[10px] font-semibold tracking-wider uppercase px-4 py-2 rounded-full transition-all duration-300"
+                                    style={{ color: mutedColor, border: `1px solid ${borderColor}` }}
                                 >
                                     {l.name}
                                 </a>
@@ -96,7 +114,8 @@ export default function ContactSection() {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {['name', 'email'].map((key) => (
                                 <div key={key}>
-                                    <label className="text-[10px] text-slate-600 block mb-2 tracking-wider uppercase font-semibold">
+                                    <label className="text-[10px] block mb-2 tracking-wider uppercase font-semibold"
+                                        style={{ color: mutedColor, fontFamily: theme.fontMono }}>
                                         {key}
                                     </label>
                                     <input
@@ -106,14 +125,19 @@ export default function ContactSection() {
                                         onFocus={() => setFocus(key)}
                                         onBlur={() => setFocus(null)}
                                         required
-                                        className="w-full bg-transparent border-b py-3 text-sm text-white outline-none placeholder:text-slate-800 transition-all duration-300"
-                                        style={{ borderColor: focus === key ? theme.primary : 'rgba(255,255,255,0.06)' }}
+                                        className="w-full bg-transparent border-b py-3 text-sm outline-none transition-all duration-300"
+                                        style={{
+                                            borderColor: focus === key ? theme.primary : borderColor,
+                                            color: inputTextColor,
+                                            '--tw-placeholder-color': placeholderColor,
+                                        }}
                                         placeholder={key === 'email' ? 'email@domain.com' : 'Your name'}
                                     />
                                 </div>
                             ))}
                             <div>
-                                <label className="text-[10px] text-slate-600 block mb-2 tracking-wider uppercase font-semibold">
+                                <label className="text-[10px] block mb-2 tracking-wider uppercase font-semibold"
+                                    style={{ color: mutedColor, fontFamily: theme.fontMono }}>
                                     Message
                                 </label>
                                 <textarea
@@ -123,8 +147,11 @@ export default function ContactSection() {
                                     onBlur={() => setFocus(null)}
                                     rows={3}
                                     required
-                                    className="w-full bg-transparent border-b py-3 text-sm text-white outline-none resize-none placeholder:text-slate-800 transition-all duration-300"
-                                    style={{ borderColor: focus === 'message' ? theme.primary : 'rgba(255,255,255,0.06)' }}
+                                    className="w-full bg-transparent border-b py-3 text-sm outline-none resize-none transition-all duration-300"
+                                    style={{
+                                        borderColor: focus === 'message' ? theme.primary : borderColor,
+                                        color: inputTextColor,
+                                    }}
                                     placeholder="Tell me about your project..."
                                 />
                             </div>
@@ -134,27 +161,20 @@ export default function ContactSection() {
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
                                 disabled={submitted}
-                                className="mt-2 px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider transition-all duration-300"
+                                className="mt-2 px-8 py-3.5 text-sm font-bold tracking-wider transition-all duration-300"
                                 style={{
-                                    background: submitted ? 'transparent' : `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
-                                    color: submitted ? theme.primary : '#fff',
-                                    border: `1px solid ${theme.primary}`,
-                                    boxShadow: submitted ? 'none' : `0 4px 20px ${theme.primary}20`,
+                                    background: submitted ? 'transparent' : theme.primary,
+                                    color: submitted ? theme.primary : (isLight ? '#000' : '#fff'),
+                                    border: isPop ? '2px solid #000' : `1px solid ${theme.primary}`,
+                                    borderRadius: theme.btnStyle === 'sharp' ? '4px' : '9999px',
+                                    boxShadow: isPop && !submitted ? '4px 4px 0px #000' : 'none',
+                                    fontFamily: theme.fontMono,
                                 }}
                             >
-                                {submitted ? '✓ Sent!' : 'Send →'}
+                                {submitted ? '✓ Sent!' : isTerminal ? '> send_message.sh' : 'Send →'}
                             </motion.button>
                         </form>
                     </motion.div>
-                </div>
-            </div>
-
-            {/* Integrated footer bar */}
-            <div className="w-full px-6 sm:px-10 md:px-16 py-5 border-t border-white/[0.04]">
-                <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-                    <span className="text-[10px] text-slate-700 tracking-wider">Built by <span className="text-slate-500">Satyajit Samal</span></span>
-                    <span className="text-[10px] text-slate-700 tracking-wider">IIIT Bhubaneswar · B.Tech CSE · 2026</span>
-                    <span className="text-[10px] text-slate-700 tracking-wider">React · Three.js · Framer Motion</span>
                 </div>
             </div>
         </section>

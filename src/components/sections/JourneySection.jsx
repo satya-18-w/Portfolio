@@ -154,7 +154,7 @@ function CyberJourney({ theme }) {
 function MinimalJourney({ theme }) {
     return (
         <section id="journey" className="py-28 overflow-x-hidden" style={{ background: theme.bg, color: theme.text }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-16">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16">
                     <h2 className="text-7xl md:text-9xl font-black tracking-tighter" style={{ fontFamily: theme.fontHeading }}>
                         My <span style={{ color: theme.primary }}>Journey</span>
@@ -191,8 +191,8 @@ function MinimalJourney({ theme }) {
 /* ── TERMINAL: git log style ─────────────────────────────────────── */
 function TerminalJourney({ theme }) {
     return (
-        <section id="journey" className="py-20" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
-            <div className="max-w-4xl mx-auto px-6">
+        <section id="journey" className="py-28" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
                     <p style={{ color: theme.primary }}>$ git log --all --oneline --graph --author=satyajit</p>
                     <p className="text-xs mb-6 mt-1" style={{ color: theme.textMuted }}>Tracing commit history of Satyajit Samal...</p>
@@ -228,8 +228,8 @@ function TerminalJourney({ theme }) {
 /* ── BRUTALIST: Clean vertical list ─────────────────────────────── */
 function BrutalistJourney({ theme }) {
     return (
-        <section id="journey" className="py-24" style={{ background: theme.bg }}>
-            <div className="max-w-6xl mx-auto px-6 lg:px-16">
+        <section id="journey" className="py-28" style={{ background: theme.bg }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="mb-12">
                     <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-2"
                         style={{ fontFamily: theme.fontHeading, color: theme.text }}>STORY</h2>

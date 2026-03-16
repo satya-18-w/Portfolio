@@ -45,9 +45,9 @@ function StatCounter({ value, label, delay = 0 }) {
         return () => clearTimeout(timer);
     }, [started, value, delay]);
     return (
-        <div ref={ref} className="flex flex-col">
-            <span className="text-3xl font-bold" style={{ color: theme.text, fontFamily: theme.fontHeading }}>{display}</span>
-            <span className="text-xs uppercase tracking-widest mt-1" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>{label}</span>
+        <div ref={ref} className="flex flex-col px-2 py-1">
+            <span className="text-3xl sm:text-4xl font-bold" style={{ color: theme.text, fontFamily: theme.fontHeading }}>{display}</span>
+            <span className="text-[11px] sm:text-xs uppercase tracking-widest mt-2" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>{label}</span>
         </div>
     );
 }
@@ -87,7 +87,7 @@ function CyberHero({ theme, role, mousePos }) {
     const yAvatar = useTransform(scrollY, [0, 1000], [0, 350]);
 
     return (
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 relative z-10 flex flex-col justify-center min-h-[95vh] w-full pt-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col justify-center min-h-[95vh] w-full pt-16">
 
             {/* BACKGROUND MARQUEE */}
             <div className="absolute top-1/4 left-0 right-0 z-0 opacity-[0.04] pointer-events-none transform -rotate-3 overflow-hidden whitespace-nowrap">
@@ -286,16 +286,16 @@ function MinimalHero({ theme, role, mousePos }) {
 
                     {/* CTAs */}
                     <TextReveal delay={0.5}>
-                        <div className="flex flex-wrap gap-4 mt-10">
+                        <div className="flex flex-wrap gap-5 mt-12">
                             <MagneticButton intensity={0.25}>
-                                <a href="#projects" className="group inline-flex items-center gap-2 px-8 py-4 text-sm font-black tracking-widest uppercase rounded-full transition-all duration-500 hover:shadow-lg hover:scale-[1.03]"
+                                <a href="#projects" className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-black tracking-widest uppercase rounded-full transition-all duration-500 hover:shadow-lg hover:scale-[1.03]"
                                     style={{ background: theme.primary, color: '#000' }}>
                                     View Projects
                                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </MagneticButton>
                             <MagneticButton intensity={0.15}>
-                                <a href="#skills" className="px-8 py-4 text-sm font-black tracking-widest uppercase rounded-full border-2 transition-all duration-500 hover:scale-[1.03] backdrop-blur-sm"
+                                <a href="#skills" className="px-10 py-5 text-sm font-black tracking-widest uppercase rounded-full border-2 transition-all duration-500 hover:scale-[1.03] backdrop-blur-sm"
                                     style={{ borderColor: theme.text, color: theme.text, background: 'rgba(255,255,255,0.4)' }}>
                                     Explore Skills
                                 </a>
@@ -305,7 +305,7 @@ function MinimalHero({ theme, role, mousePos }) {
 
                     {/* Stats - proper grid */}
                     <TextReveal delay={0.6}>
-                        <div className="grid grid-cols-3 gap-6 sm:gap-10 mt-16 pt-8 border-t-2" style={{ borderColor: `${theme.primary}25` }}>
+                        <div className="grid grid-cols-3 gap-8 sm:gap-12 mt-16 pt-10 border-t-2" style={{ borderColor: `${theme.primary}25` }}>
                             <StatCounter value="15+" label="Projects Built" delay={200} />
                             <StatCounter value="5+" label="AI Models Deployed" delay={400} />
                             <StatCounter value="99.9%" label="System Uptime" delay={600} />
@@ -484,7 +484,7 @@ function BasementHero({ theme, role, mousePos }) {
                 </div>
             </div>
 
-            <div className="max-w-[1400px] w-full px-8 relative z-10 flex flex-col justify-center min-h-[90vh]">
+            <div className="max-w-7xl w-full mx-auto px-6 lg:px-12 relative z-10 flex flex-col justify-center min-h-[90vh]">
 
                 {/* BACKGROUND AVATAR */}
                 <motion.div style={{ y: yAvatar }} className="absolute right-0 top-[20%] w-[120vw] sm:w-[90vw] lg:w-[60vw] h-screen pointer-events-none z-0 overflow-hidden mix-blend-luminosity opacity-[0.35]">

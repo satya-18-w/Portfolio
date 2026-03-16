@@ -140,7 +140,7 @@ function MinimalSkills({ theme }) {
     const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
     return (
         <section id="skills" className="py-28" style={{ background: theme.bgAlt, color: theme.text }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-16">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
                     <h2 className="text-7xl md:text-9xl font-black tracking-tighter" style={{ fontFamily: theme.fontHeading, color: theme.text }}>
                         Core <span style={{ color: theme.primary }}>Expertise</span>
@@ -191,8 +191,8 @@ function TerminalSkills({ theme }) {
     const [active, setActive] = useState('All Skills');
     const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
     return (
-        <section id="skills" className="py-20" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
-            <div className="max-w-4xl mx-auto px-6">
+        <section id="skills" className="py-28" style={{ background: '#000', color: theme.text, fontFamily: theme.fontMono }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
                     <p className="mb-1" style={{ color: theme.primary }}>$ skill_matrix --user=satyajit --format=htop</p>
                     <p className="text-xs mb-6" style={{ color: theme.textMuted }}>Scanning neural stack... 19 modules loaded.</p>
@@ -247,8 +247,8 @@ function BrutalistSkills({ theme }) {
     const [active, setActive] = useState('All Skills');
     const filtered = active === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === active);
     return (
-        <section id="skills" className="py-24" style={{ background: theme.bg }}>
-            <div className="max-w-6xl mx-auto px-6 lg:px-16">
+        <section id="skills" className="py-28" style={{ background: theme.bg }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <div className="mb-10">
                     <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-2"
                         style={{ fontFamily: theme.fontHeading, color: theme.text }}>SKILLS</h2>

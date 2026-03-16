@@ -13,7 +13,7 @@ function CyberFooter({ theme }) {
     const [showTop, setShowTop] = useState(false);
     useEffect(() => { const h = () => setShowTop(window.scrollY > 400); window.addEventListener('scroll', h); return () => window.removeEventListener('scroll', h); }, []);
     return (
-        <footer className="relative py-16 mt-0" style={{ background: '#030014', color: theme.text, borderTop: `1px solid rgba(255,255,255,0.06)` }}>
+        <footer className="relative py-16 mt-0" style={{ background: theme.bg, color: theme.text, borderTop: `1px solid ${theme.surfaceBorder}` }}>
             <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div>
                     <div className="flex items-center gap-2 mb-3">
@@ -23,9 +23,9 @@ function CyberFooter({ theme }) {
                     <p className="text-sm mb-5" style={{ color: theme.textMuted }}>Building distributed systems and AI-powered applications. IIIT Bhubaneswar — B.Tech CSE.</p>
                     <div className="flex gap-2">{SOCIALS.map(s => (
                         <a key={s.label} href={s.href} className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all hover:-translate-y-0.5"
-                            style={{ border: '1px solid rgba(255,255,255,0.09)', color: '#94a3b8' }}
+                            style={{ border: `1px solid ${theme.surfaceBorder}`, color: theme.textMuted }}
                             onMouseEnter={e => { e.currentTarget.style.borderColor = `${theme.primary}50`; e.currentTarget.style.color = theme.primary; }}
-                            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)'; e.currentTarget.style.color = '#94a3b8'; }}>
+                            onMouseLeave={e => { e.currentTarget.style.borderColor = theme.surfaceBorder; e.currentTarget.style.color = theme.textMuted; }}>
                             {s.icon}
                         </a>
                     ))}</div>
@@ -36,7 +36,7 @@ function CyberFooter({ theme }) {
                 </div>
                 <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>System</p>
-                    <div className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div className="p-4 rounded-xl" style={{ background: theme.surface, border: `1px solid ${theme.surfaceBorder}` }}>
                         <div className="flex items-center gap-2 mb-1">
                             <div className="w-2 h-2 rounded-full" style={{ background: '#4ade80', boxShadow: '0 0 6px #4ade80' }} />
                             <span className="text-sm font-bold">Portfolio v2.0</span>
@@ -47,7 +47,7 @@ function CyberFooter({ theme }) {
                         style={{ background: theme.primary, color: '#000' }}>Start a Conversation →</a>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto px-6 mt-12 pt-6 flex justify-between text-xs" style={{ color: theme.textMuted, borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            <div className="max-w-7xl mx-auto px-6 mt-12 pt-6 flex justify-between text-xs" style={{ color: theme.textMuted, borderTop: `1px solid ${theme.surfaceBorder}` }}>
                 <span>© 2024 Satyajit Samal · Built with React + Three.js</span>
                 <span style={{ fontFamily: theme.fontMono }}>CRAFTED WITH ♥ FROM IIIT BHUBANESWAR</span>
             </div>
@@ -67,7 +67,7 @@ function CyberFooter({ theme }) {
 function MinimalFooter({ theme }) {
     return (
         <footer style={{ background: theme.bg, color: theme.text, borderTop: `3px solid ${theme.primary}` }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-16 py-16 flex flex-col md:flex-row justify-between gap-10">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 flex flex-col md:flex-row justify-between gap-10">
                 <div>
                     <h3 className="text-4xl font-black tracking-tighter mb-2" style={{ fontFamily: theme.fontHeading, color: theme.primary }}>SATYAJIT SAMAL</h3>
                     <p className="text-sm" style={{ color: theme.textMuted }}>AI Engineer & Backend Developer</p>
@@ -83,7 +83,7 @@ function MinimalFooter({ theme }) {
                     </div>
                 </div>
             </div>
-            <div className="border-t-2 max-w-7xl mx-auto px-6 lg:px-16 py-6 flex justify-between text-xs" style={{ borderColor: `${theme.primary}20`, color: theme.textMuted }}>
+            <div className="border-t-2 max-w-7xl mx-auto px-6 lg:px-12 py-6 flex justify-between text-xs" style={{ borderColor: `${theme.primary}20`, color: theme.textMuted }}>
                 <span>© 2024 Satyajit Samal</span>
                 <span style={{ color: theme.primary }}>React · Three.js · Framer Motion</span>
             </div>
@@ -94,8 +94,8 @@ function MinimalFooter({ theme }) {
 /* ── TERMINAL ─────────────────────────────────────────────────── */
 function TerminalFooter({ theme }) {
     return (
-        <footer style={{ background: '#000', color: theme.text, borderTop: `1px solid ${theme.primary}30`, fontFamily: theme.fontMono }}>
-            <div className="max-w-4xl mx-auto px-6 py-10">
+        <footer style={{ background: theme.bg, color: theme.text, borderTop: `1px solid ${theme.primary}30`, fontFamily: theme.fontMono }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
                 <p style={{ color: theme.primary }}>$ display --credits --verbose</p>
                 <div className="mt-3 text-xs space-y-1" style={{ color: theme.textMuted }}>
                     <p>NAME=Satyajit Samal</p>
@@ -115,7 +115,7 @@ function TerminalFooter({ theme }) {
 function BrutalistFooter({ theme }) {
     return (
         <footer style={{ background: theme.bg, borderTop: `2px solid ${theme.primary}30` }}>
-            <div className="max-w-6xl mx-auto px-6 lg:px-16 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
                     <h3 className="text-2xl font-black tracking-tighter mb-1" style={{ fontFamily: theme.fontHeading, color: theme.text }}>
                         SATYAJIT SAMAL
@@ -126,7 +126,7 @@ function BrutalistFooter({ theme }) {
                     {LINKS.map(l => <a key={l} href={`#${l.toLowerCase()}`} className="text-xs font-bold uppercase tracking-wider hover:opacity-70 transition-all" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>{l}</a>)}
                 </div>
             </div>
-            <div className="max-w-6xl mx-auto px-6 lg:px-16 pb-6 text-xs flex justify-between" style={{ color: `${theme.textMuted}80` }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-6 text-xs flex justify-between" style={{ color: `${theme.textMuted}80` }}>
                 <span>© 2024 Satyajit Samal</span>
                 <span style={{ fontFamily: theme.fontMono }}>React · Three.js</span>
             </div>
