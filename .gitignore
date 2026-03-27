@@ -52,6 +52,7 @@ coverage/
 # ─── Antigravity AI Config (local dev assistant — not for GitHub) ─────────────
 .antigravity/
 .gemini/
+.claude/
 
 # ─── Misc ─────────────────────────────────────────────────────────────────────
 *.local

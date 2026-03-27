@@ -12,7 +12,10 @@ import { Marquee } from '../ui/Marquee';
 import { MagneticButton } from '../ui/MagneticButton';
 import FloatingTechIcons from '../three/FloatingTechIcons';
 import ScrollGeometry from '../three/ScrollGeometry';
+import WaterDropletBackground from '../three/WaterDropletBackground';
 import { HoverMask } from '../ui/HoverMask';
+import Container from '../layout/Container';
+import SectionWrapper from '../layout/SectionWrapper';
 
 // ── Animated stat counter ────────────────────────────────────────────
 function StatCounter({ value, label, delay = 0 }) {
@@ -83,132 +86,89 @@ function ScrollProgress() {
 // ─────────────────────────────────────────────────────────────────────
 function CyberHero({ theme, role, mousePos }) {
     const { scrollY } = useScroll();
-    const yText = useTransform(scrollY, [0, 1000], [0, 150]);
-    const yAvatar = useTransform(scrollY, [0, 1000], [0, 350]);
+    const yText = useTransform(scrollY, [0, 1000], [0, 100]);
+    const yAvatar = useTransform(scrollY, [0, 1000], [0, 200]);
 
     return (
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 flex flex-col justify-center min-h-[95vh] w-full pt-16">
-
+        <SectionWrapper id="hero" className="w-full min-h-[95vh] flex items-center pt-24 overflow-visible">
             {/* BACKGROUND MARQUEE */}
-            <div className="absolute top-1/4 left-0 right-0 z-0 opacity-[0.04] pointer-events-none transform -rotate-3 overflow-hidden whitespace-nowrap">
+            <div className="absolute top-1/4 left-0 right-0 z-bg opacity-[0.04] pointer-events-none transform -rotate-3 overflow-hidden whitespace-nowrap">
                 <Marquee text="CREATIVE DEVELOPER • AI ENGINEER • BACKEND ARCHITECT •" speed={30} className="text-[12rem] font-black" />
             </div>
-
-            <div className="absolute bottom-1/4 left-0 right-0 z-0 opacity-[0.04] pointer-events-none transform rotate-2 overflow-hidden whitespace-nowrap">
+            <div className="absolute bottom-1/4 left-0 right-0 z-bg opacity-[0.04] pointer-events-none transform rotate-2 overflow-hidden whitespace-nowrap">
                 <Marquee direction="right" text="DISTRIBUTED SYSTEMS • REACT THREE FIBER •" speed={40} className="text-[10rem] font-black" />
             </div>
 
-            {/* HOVER MASK EFFECT */}
-            <div className="absolute inset-0 z-0 hidden lg:block overflow-hidden pointer-events-none">
-                <HoverMask maskColor="#E2D1F9" size={500} className="w-full h-full">
-                    <div className="w-full h-full flex flex-col items-center justify-center text-center pt-20">
-                        {/* Duplicate silhouette typography for mask reveal */}
-                        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-2 md:mb-5">
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-transparent -rotate-2">
-                                <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black uppercase text-black">The</span>
+            {/* WATER DROPLET HERO BACKGROUND */}
+            <WaterDropletBackground />
+
+            <Container className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 items-center relative h-full">
+                
+                {/* LEFT: Text Content */}
+                <motion.div style={{ y: yText }} className="flex flex-col items-start justify-center z-base w-full relative z-20">
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5">
+                        <TextReveal delay={0.1}>
+                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-2 shadow-[4px_4px_0px_#000] bg-white">
+                                <span className="font-mono text-xl md:text-2xl font-black uppercase text-black">The</span>
                             </div>
-                            <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
+                        </TextReveal>
+                        <TextReveal delay={0.2}>
+                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
                                 Unstoppable
                             </h1>
-                        </div>
-                        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-2 md:mb-5">
-                            <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black uppercase text-black" style={{ fontFamily: theme.fontMono }}>
+                        </TextReveal>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5">
+                        <TextReveal delay={0.3}>
+                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase text-black" style={{ fontFamily: theme.fontMono }}>
                                 AI Engineer
                             </h1>
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-transparent rotate-3">
-                                <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black text-black">{'&'}</span>
+                        </TextReveal>
+                        <TextReveal delay={0.4}>
+                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black rotate-3 shadow-[4px_4px_0px_#000] bg-white">
+                                <span className="font-mono text-xl md:text-2xl font-black text-black">{'&'}</span>
                             </div>
-                        </div>
-                        <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-20">
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-transparent -rotate-1">
-                                <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black uppercase text-black">Backend</span>
+                        </TextReveal>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-16">
+                        <TextReveal delay={0.5}>
+                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-1 shadow-[4px_4px_0px_#000] bg-white">
+                                <span className="font-mono text-xl md:text-2xl font-black uppercase text-black">Backend</span>
                             </div>
-                            <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
+                        </TextReveal>
+                        <TextReveal delay={0.6}>
+                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
                                 Architect
                             </h1>
-                        </div>
+                        </TextReveal>
                     </div>
-                </HoverMask>
-            </div>
 
-            {/* 3D AVATAR & ORBITING ICONS - Centered, Z-index 20 */}
-            <motion.div style={{ y: yAvatar }} className="absolute inset-0 pointer-events-auto z-20 flex items-center justify-center pt-20">
-                <div className="w-screen h-[75vh] lg:h-[90vh]">
+                    <TextReveal delay={0.7}>
+                        <div className="flex flex-wrap gap-4">
+                            <MagneticButton intensity={0.2}>
+                                <a href="#projects" className="inline-block bg-[#E0FBFC] px-8 py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider" style={{ fontFamily: theme.fontHeading }}>
+                                    View Archive ↓
+                                </a>
+                            </MagneticButton>
+                            <MagneticButton intensity={0.2}>
+                                <a href="#skills" className="inline-block bg-white px-8 py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider" style={{ fontFamily: theme.fontHeading }}>
+                                    Skills Playground
+                                </a>
+                            </MagneticButton>
+                        </div>
+                    </TextReveal>
+                </motion.div>
+
+                {/* RIGHT: 3D Visual */}
+                <motion.div style={{ y: yAvatar }} className="relative w-[120%] -ml-[10%] aspect-square md:h-[750px] flex items-center justify-center z-float scale-110 lg:scale-125 transition-transform duration-1000">
                     <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: true, alpha: true }} dpr={[1, 1.5]}>
                         <AvatarScene mousePos={mousePos} theme={theme} />
                     </Canvas>
-                </div>
-            </motion.div>
-
-            {/* MASSIVE TOYFIGHT TYPOGRAPHY (Above the 3D element) - TEXT LEFT */}
-            <motion.div style={{ y: yText }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-30 flex flex-col items-start justify-center text-left mt-4 w-full max-w-4xl pointer-events-none">
-
-                {/* Line 1 */}
-                <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5">
-                    <TextReveal delay={0.1}>
-                        <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-2 shadow-[4px_4px_0px_#000] bg-white">
-                            <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black uppercase text-black">The</span>
-                        </div>
-                    </TextReveal>
-                    <TextReveal delay={0.2}>
-                        <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black tracking-tighter uppercase text-black"
-                            style={{ fontFamily: theme.fontHeading }}>
-                            Unstoppable
-                        </h1>
-                    </TextReveal>
-                </div>
-
-                {/* Line 2 */}
-                <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5 z-30 relative">
-                    <TextReveal delay={0.3}>
-                        <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black uppercase text-black"
-                            style={{ fontFamily: theme.fontMono }}>
-                            AI Engineer
-                        </h1>
-                    </TextReveal>
-                    <TextReveal delay={0.4}>
-                        <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black rotate-3 shadow-[4px_4px_0px_#000] bg-white">
-                            <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black text-black">{'&'}</span>
-                        </div>
-                    </TextReveal>
-                </div>
-
-                {/* Line 3 */}
-                <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-20 z-10 relative">
-                    <TextReveal delay={0.5}>
-                        <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-1 shadow-[4px_4px_0px_#000] bg-white">
-                            <span className="font-mono text-xl md:text-3xl lg:text-4xl font-black uppercase text-black">Backend</span>
-                        </div>
-                    </TextReveal>
-                    <TextReveal delay={0.6}>
-                        <h1 className="text-3xl md:text-5xl lg:text-[5rem] font-black tracking-tighter uppercase text-black"
-                            style={{ fontFamily: theme.fontHeading }}>
-                            Architect
-                        </h1>
-                    </TextReveal>
-                </div>
-
-            </motion.div>
-
-            {/* Anchored text (bottom corners) */}
-            <div className="absolute bottom-8 left-8 z-30 pointer-events-none hidden md:block">
-                <TextReveal delay={0.8}>
-                    <p className="font-bold text-black font-mono uppercase text-sm tracking-widest">Satyajit Samal © 2024</p>
-                    <p className="font-bold text-black/50 font-mono text-xs mt-1 uppercase">Based in India</p>
-                </TextReveal>
-            </div>
-
-            <div className="absolute bottom-8 right-8 z-30 pointer-events-auto hidden md:block">
-                <TextReveal delay={0.9}>
-                    <MagneticButton intensity={0.2}>
-                        <a href="#projects" className="inline-block bg-[#E0FBFC] px-8 py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider" style={{ fontFamily: theme.fontHeading }}>
-                            View Archive ↓
-                        </a>
-                    </MagneticButton>
-                </TextReveal>
-            </div>
-        </div>
+                </motion.div>
+            </Container>
+        </SectionWrapper>
     );
 }
 

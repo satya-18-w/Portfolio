@@ -5,6 +5,9 @@ import Magnetic from '../ui/Magnetic';
 import { useTheme } from '../../context/ThemeContext';
 import { TextReveal } from '../ui/TextReveal';
 import TiltCard from '../ui/TiltCard';
+import ProjectCard from '../ui/ProjectCard';
+import Container from '../layout/Container';
+import SectionWrapper from '../layout/SectionWrapper';
 
 const PROJECTS = [
     {
@@ -45,10 +48,10 @@ const PROJECTS = [
 // ── TOYFIGHT BRUTALIST POP: Overlapping layout, hard shadows ─────────────
 function CyberProjects({ theme }) {
     return (
-        <section id="projects" className="py-32 overflow-hidden" style={{ background: theme.bg, color: theme.text }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <SectionWrapper id="projects" style={{ background: theme.bg, color: theme.text }}>
+            <Container>
                 <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="flex flex-col mb-32 z-10 relative">
+                    className="flex flex-col mb-24 z-10 relative">
                     <span className="inline-block px-6 py-2 rounded-full text-sm font-black uppercase tracking-widest border-2 border-black w-max shadow-[4px_4px_0px_#000] mb-8 bg-[#E0FBFC]"
                         style={{ color: '#000', fontFamily: theme.fontMono }}>
                         Portfolio 2024
@@ -62,77 +65,17 @@ function CyberProjects({ theme }) {
                     </h2>
                 </motion.div>
 
-                <div className="space-y-40">
+                <div className="flex flex-col gap-24 lg:gap-32 w-full">
                     {PROJECTS.map((p, i) => (
-                        <motion.div key={p.id} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.8, ease: "easeOut" }}>
-                            <div className="group relative rounded-[2.5rem] p-6 lg:p-12 transition-transform duration-500 hover:-translate-y-2"
-                                style={{
-                                    background: theme.surface,
-                                    border: '3px solid #000',
-                                    boxShadow: '12px 12px 0px rgba(0,0,0,1)'
-                                }}>
-
-                                <div className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20 relative z-10`}>
-                                    {/* Image Block */}
-                                    <div data-cursor="hover" data-cursor-text="VIEW" className="w-full lg:w-1/2 relative overflow-hidden rounded-4xl border-4 border-black shadow-[8px_8px_0px_#000] bg-white group-hover:-translate-y-2 group-hover:-translate-x-2 transition-transform duration-500">
-                                        <div className="w-full aspect-4/3 pointer-events-none">
-                                            <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-                                        </div>
-                                        {/* Number Badge */}
-                                        <div className="absolute -top-4 -left-4 text-3xl font-black font-mono w-24 h-24 rounded-full flex items-center justify-center border-4 border-black text-black z-20 shadow-[4px_4px_0px_#000]"
-                                            style={{ background: i % 2 === 0 ? '#FAEDCD' : '#FEFAE0' }}>
-                                            {p.id}
-                                        </div>
-                                    </div>
-
-                                    {/* Text Content */}
-                                    <div className="w-full lg:w-1/2 flex flex-col gap-16 relative">
-                                        <div className="flex items-center gap-4">
-                                            <span className="px-5 py-2 rounded-full border-4 border-black font-mono text-sm font-black uppercase shadow-[4px_4px_0px_#000] bg-[#E0FBFC]" style={{ color: '#000' }}>
-                                                {p.category}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-col gap-6">
-                                            <h3 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-none tracking-tighter" style={{ color: '#000', fontFamily: theme.fontHeading }}>{p.title}</h3>
-                                            <p className="text-gray-800 text-xl md:text-2xl font-bold leading-relaxed font-body max-w-xl">{p.description}</p>
-                                        </div>
-
-                                        <div className="flex flex-wrap gap-4 md:gap-8 py-10 border-y-4 border-black/10 mt-4">
-                                            {p.tech.map(t => (
-                                                <span key={t} className="px-6 py-3 md:px-8 md:py-4 text-sm md:text-xl font-black font-mono leading-none rounded-full border-4 border-black shadow-[6px_6px_0px_#000] bg-white hover:translate-y-[-4px] transition-transform inline-block mb-2"
-                                                    style={{ color: '#000' }}>{t}</span>
-                                            ))}
-                                        </div>
-
-                                        <div className="flex flex-wrap gap-8 pt-10 mt-4">
-                                            {p.slug ? (
-                                                <Magnetic intensity={0.2}>
-                                                    <Link to={`/project/${p.slug}`} className="px-10 py-5 md:px-14 md:py-7 rounded-full text-base md:text-xl font-black tracking-widest uppercase transition-all border-4 border-black shadow-[10px_10px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:translate-x-1 inline-block bg-[#00F5FF]"
-                                                        style={{ color: '#000', fontFamily: theme.fontHeading }}>Explore System</Link>
-                                                </Magnetic>
-                                            ) : (
-                                                <Magnetic intensity={0.2}>
-                                                    <a href={p.live} className="px-10 py-5 md:px-14 md:py-7 rounded-full text-base md:text-xl font-black tracking-widest uppercase transition-all border-4 border-black shadow-[10px_10px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:translate-x-1 inline-block bg-[#00F5FF]"
-                                                        style={{ color: '#000', fontFamily: theme.fontHeading }}>View Live</a>
-                                                </Magnetic>
-                                            )}
-                                            <Magnetic intensity={0.2}>
-                                                <a href={p.github} className="px-10 py-5 md:px-14 md:py-7 rounded-full text-base md:text-xl font-black tracking-widest uppercase transition-all border-4 border-black shadow-[10px_10px_0px_#000] hover:shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:translate-x-1 bg-white inline-block"
-                                                    style={{ color: '#000', fontFamily: theme.fontHeading }}>Source Code</a>
-                                            </Magnetic>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                        <ProjectCard key={p.id} project={p} index={i} theme={theme} />
                     ))}
                 </div>
 
                 <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="mt-48 text-center rounded-[3rem] p-16 relative overflow-hidden border-4 border-black shadow-[16px_16px_0px_#000]"
+                    className="mt-32 text-center rounded-[3rem] p-12 lg:p-16 relative overflow-hidden border-4 border-black shadow-[16px_16px_0px_#000] w-full"
                     style={{ background: '#E2D1F9' }}>
-                    <h3 className="text-6xl md:text-8xl font-black mb-8 uppercase" style={{ fontFamily: theme.fontHeading, color: '#000' }}>Build Something?</h3>
-                    <p className="text-black font-medium text-2xl mb-12 max-w-2xl mx-auto font-body">Available for dedicated engineering roles, distributed systems architecture, and creative AI integration.</p>
+                    <h3 className="text-4xl md:text-6xl lg:text-8xl font-black mb-8 uppercase" style={{ fontFamily: theme.fontHeading, color: '#000' }}>Build Something?</h3>
+                    <p className="text-black font-medium text-xl lg:text-2xl mb-12 max-w-2xl mx-auto font-body">Available for dedicated engineering roles, distributed systems architecture, and creative AI integration.</p>
                     <div className="flex flex-wrap gap-6 justify-center">
                         <Magnetic intensity={0.3}>
                             <a href="#contact" className="px-12 py-6 rounded-full text-xl font-black uppercase transition-all border-4 border-black shadow-[8px_8px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-1 hover:translate-x-1 bg-white"
@@ -140,124 +83,12 @@ function CyberProjects({ theme }) {
                         </Magnetic>
                     </div>
                 </motion.div>
-            </div>
-        </section>
+            </Container>
+        </SectionWrapper>
     );
 }
 
-// ── MINIMAL / STITCH ORANGE: Scroll-driven editorial cards ──────────
-function ProjectCard({ project: p, index: i, theme }) {
-    const cardRef = useRef(null);
-    const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start end", "end start"] });
 
-    // Parallax image inside card
-    const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-    const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
-
-    const isEven = i % 2 === 0;
-
-    return (
-        <motion.div
-            ref={cardRef}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className={`group flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-0 items-stretch rounded-2xl overflow-hidden`}
-            style={{ background: theme.bg, border: `1.5px solid ${theme.surfaceBorder}` }}
-        >
-            {/* Image Block with parallax */}
-            <div className="w-full md:w-1/2 relative overflow-hidden" style={{ minHeight: '320px' }}>
-                <motion.div style={{ y: imageY, scale: imageScale }} className="absolute inset-0">
-                    <img
-                        src={p.image}
-                        alt={p.title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:saturate-[1.2]"
-                    />
-                </motion.div>
-                {/* Project number overlay */}
-                <div className="absolute top-6 left-6 z-10">
-                    <span className="text-5xl font-black opacity-20" style={{ color: theme.primary, fontFamily: theme.fontMono }}>
-                        {p.id}
-                    </span>
-                </div>
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 z-[1]"
-                    style={{
-                        background: isEven
-                            ? `linear-gradient(to right, transparent 60%, ${theme.bg})`
-                            : `linear-gradient(to left, transparent 60%, ${theme.bg})`
-                    }}
-                />
-            </div>
-
-            {/* Text Content */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center gap-5 p-8 lg:p-12">
-                <div className="flex items-center gap-3">
-                    <div className="h-[2px] w-6 rounded-full" style={{ background: theme.primary }} />
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em]"
-                        style={{ color: theme.primary, fontFamily: theme.fontMono }}>
-                        {p.category}
-                    </span>
-                </div>
-
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight transition-colors duration-300 group-hover:translate-x-1"
-                    style={{ fontFamily: theme.fontHeading, color: theme.text, transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)' }}>
-                    {p.title}
-                </h3>
-
-                <p className="text-sm leading-relaxed" style={{ color: theme.textMuted }}>
-                    {p.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-1">
-                    {p.tech.map((t, ti) => (
-                        <motion.span
-                            key={t}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 * ti, duration: 0.4 }}
-                            className="px-3 py-1 text-[11px] rounded-full font-semibold tracking-wide transition-all duration-300 hover:scale-105"
-                            style={{ background: `${theme.primary}12`, border: `1px solid ${theme.primary}30`, color: theme.primary }}
-                        >
-                            {t}
-                        </motion.span>
-                    ))}
-                </div>
-
-                <div className="flex gap-3 mt-4 pt-4 border-t" style={{ borderColor: `${theme.primary}15` }}>
-                    {p.slug ? (
-                        <Magnetic intensity={0.15}>
-                            <Link to={`/project/${p.slug}`}
-                                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all duration-500 hover:shadow-md hover:scale-[1.02]"
-                                style={{ background: theme.primary, color: '#fff' }}>
-                                Explore
-                                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                            </Link>
-                        </Magnetic>
-                    ) : (
-                        <Magnetic intensity={0.15}>
-                            <a href={p.live}
-                                className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all duration-500 hover:shadow-md hover:scale-[1.02]"
-                                style={{ background: theme.primary, color: '#fff' }}>
-                                View Live
-                                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 17L17 7M17 7H7M17 7v10" /></svg>
-                            </a>
-                        </Magnetic>
-                    )}
-                    <Magnetic intensity={0.1}>
-                        <a href={p.github}
-                            className="px-6 py-3 rounded-full font-bold text-sm border-2 transition-all duration-500 hover:scale-[1.02]"
-                            style={{ borderColor: theme.text, color: theme.text }}>
-                            GitHub
-                        </a>
-                    </Magnetic>
-                </div>
-            </div>
-        </motion.div>
-    );
-}
 
 function MinimalProjects({ theme }) {
     return (

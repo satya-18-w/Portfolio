@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@theme {
+  --z-bg: -10;
+  --z-base: 0;
+  --z-float: 10;
+  --z-nav: 50;
+  --z-modal: 100;
+}
+
 :root {
     --accent-primary: #6366f1;
     --accent-secondary: #8b5cf6;

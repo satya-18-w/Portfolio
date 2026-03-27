@@ -3,31 +3,64 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SkillCard from '../ui/SkillCard';
+import SectionWrapper from '../layout/SectionWrapper';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CATEGORIES = ['All Skills', 'Backend', 'DevOps', 'AI & ML', 'Frontend'];
+const CATEGORIES = ['All Skills', 'Frontend & UI', 'Backend & APIs', 'AI & ML', 'Databases', 'DevOps & Cloud', 'Tools'];
 
 const SKILLS = [
-    { name: 'Go', category: 'Backend', icon: '⚡', level: 95 },
-    { name: 'Python', category: 'Backend', icon: '🐍', level: 90 },
-    { name: 'Node.js', category: 'Backend', icon: '⬢', level: 80 },
-    { name: 'PostgreSQL', category: 'Backend', icon: '🗄', level: 85 },
-    { name: 'Redis', category: 'Backend', icon: '⚙', level: 80 },
-    { name: 'gRPC', category: 'Backend', icon: '🔗', level: 78 },
-    { name: 'Kubernetes', category: 'DevOps', icon: '☸', level: 82 },
-    { name: 'Docker', category: 'DevOps', icon: '🐳', level: 92 },
-    { name: 'AWS', category: 'DevOps', icon: '☁', level: 85 },
-    { name: 'Jenkins', category: 'DevOps', icon: '🤖', level: 72 },
-    { name: 'Kafka', category: 'DevOps', icon: '📨', level: 75 },
-    { name: 'LangGraph', category: 'AI & ML', icon: '🔗', level: 88 },
+    { name: 'HTML5', category: 'Frontend & UI', icon: '🌐', level: 95 },
+    { name: 'CSS3', category: 'Frontend & UI', icon: '💅', level: 90 },
+    { name: 'JavaScript', category: 'Frontend & UI', icon: 'JS', level: 95 },
+    { name: 'TypeScript', category: 'Frontend & UI', icon: 'TS', level: 88 },
+    { name: 'React.js', category: 'Frontend & UI', icon: '⚛', level: 90 },
+    { name: 'Next.js', category: 'Frontend & UI', icon: '▲', level: 85 },
+    { name: 'Tailwind CSS', category: 'Frontend & UI', icon: '🎨', level: 95 },
+
+    { name: 'Go (Golang) ⭐', category: 'Backend & APIs', icon: '🐹', level: 95 },
+    { name: 'Python', category: 'Backend & APIs', icon: '🐍', level: 90 },
+    { name: 'Node.js', category: 'Backend & APIs', icon: '⬢', level: 85 },
+    { name: 'Echo', category: 'Backend & APIs', icon: '🎛', level: 85 },
+    { name: 'Fiber', category: 'Backend & APIs', icon: '⚡', level: 88 },
+    { name: 'FastAPI', category: 'Backend & APIs', icon: '🚀', level: 90 },
+    { name: 'REST APIs', category: 'Backend & APIs', icon: '🔗', level: 95 },
+    { name: 'gRPC', category: 'Backend & APIs', icon: '🚄', level: 85 },
+    { name: 'WebSockets', category: 'Backend & APIs', icon: '🔌', level: 80 },
+    { name: 'GraphQL', category: 'Backend & APIs', icon: '🕸', level: 75 },
+    { name: 'JWT Auth', category: 'Backend & APIs', icon: '🔑', level: 90 },
+    { name: 'OAuth 2.0', category: 'Backend & APIs', icon: '🛡', level: 85 },
+
+    { name: 'NumPy', category: 'AI & ML', icon: '🔢', level: 85 },
+    { name: 'Pandas', category: 'AI & ML', icon: '🐼', level: 85 },
+    { name: 'Scikit-learn', category: 'AI & ML', icon: '🧪', level: 80 },
+    { name: 'TensorFlow', category: 'AI & ML', icon: '🧠', level: 75 },
     { name: 'PyTorch', category: 'AI & ML', icon: '🔥', level: 82 },
-    { name: 'TensorFlow', category: 'AI & ML', icon: '🧠', level: 78 },
-    { name: 'Transformers', category: 'AI & ML', icon: '🤗', level: 85 },
-    { name: 'React', category: 'Frontend', icon: '⚛', level: 88 },
-    { name: 'TypeScript', category: 'Frontend', icon: 'TS', level: 82 },
-    { name: 'Three.js', category: 'Frontend', icon: '△', level: 70 },
-    { name: 'Tailwind', category: 'Frontend', icon: '🎨', level: 90 },
+    { name: 'MLflow ⭐', category: 'AI & ML', icon: '📈', level: 85 },
+    { name: 'Streamlit', category: 'AI & ML', icon: '👑', level: 80 },
+    { name: 'DVC', category: 'AI & ML', icon: '🗂', level: 75 },
+    { name: 'Jupyter', category: 'AI & ML', icon: '📓', level: 90 },
+
+    { name: 'PostgreSQL ⭐', category: 'Databases', icon: '🐘', level: 95 },
+    { name: 'MongoDB', category: 'Databases', icon: '🍃', level: 85 },
+    { name: 'Redis', category: 'Databases', icon: '🔴', level: 88 },
+    { name: 'MySQL', category: 'Databases', icon: '🐬', level: 80 },
+    { name: 'Pinecone', category: 'Databases', icon: '🌲', level: 85 },
+    { name: 'Waviate', category: 'Databases', icon: '🌊', level: 75 },
+    { name: 'Neo4j', category: 'Databases', icon: '🕸', level: 70 },
+
+    { name: 'Docker ⭐', category: 'DevOps & Cloud', icon: '🐳', level: 95 },
+    { name: 'GitHub Actions', category: 'DevOps & Cloud', icon: '▶', level: 85 },
+    { name: 'AWS (EC2, S3)', category: 'DevOps & Cloud', icon: '☁', level: 85 },
+    { name: 'Vercel', category: 'DevOps & Cloud', icon: '▲', level: 90 },
+    { name: 'Sevalla', category: 'DevOps & Cloud', icon: '▲', level: 70 },
+    { name: 'Prometheus', category: 'DevOps & Cloud', icon: '🔭', level: 75 },
+
+    { name: 'Git & GitHub ⭐', category: 'Tools', icon: '🐙', level: 95 },
+    { name: 'VS Code', category: 'Tools', icon: '💻', level: 95 },
+    { name: 'Postman', category: 'Tools', icon: '📬', level: 90 },
+    { name: 'Linux', category: 'Tools', icon: '🐧', level: 85 },
 ];
 
 /* ── TOYFIGHT BRUTALIST POP: Draggable floating blocky cards ─────────────────────────── */
@@ -52,9 +85,9 @@ function CyberSkills({ theme }) {
     }, []);
 
     return (
-        <section id="skills" ref={sectionRef} className="relative py-32 overflow-hidden" style={{ background: theme.bg, color: theme.text }}>
+        <SectionWrapper id="skills" ref={sectionRef} style={{ background: theme.bg, color: theme.text }} className="overflow-hidden">
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 relative z-10">
                 <div ref={headerRef} className="text-left md:text-center mb-16 md:mb-24">
                     <h2 className="text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.85] z-10 relative" style={{ fontFamily: theme.fontHeading }}>
                         Skills{' '}
@@ -81,7 +114,7 @@ function CyberSkills({ theme }) {
                                     color: '#000'
                                 }}>
                                 <span className="text-xl">
-                                    {cat === 'All Skills' ? '✦' : cat === 'Backend' ? '⚙' : cat === 'DevOps' ? '☁' : cat === 'AI & ML' ? '🧠' : '🎨'}
+                                    {cat === 'All Skills' ? '✦' : cat === 'Frontend & UI' ? '🎨' : cat === 'Backend & APIs' ? '⚙' : cat === 'AI & ML' ? '🧠' : cat === 'Databases' ? '🗄' : cat === 'DevOps & Cloud' ? '☁' : '🛠'}
                                 </span>
                                 <span>{cat}</span>
                             </button>
@@ -91,46 +124,26 @@ function CyberSkills({ theme }) {
                     {/* Grid/Physics container */}
                     <div ref={constraintsRef} className="flex-1 relative min-h-[520px] rounded-[3rem] border-4 border-black shadow-[16px_16px_0px_#000] overflow-hidden bg-white">
                         {/* Internal grid pattern */}
-                        <div className="absolute inset-0 pointer-events-none opacity-20"
+                        <div className="absolute inset-0 pointer-events-none opacity-20 z-0"
                             style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6 p-8 relative z-10">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 lg:gap-8 p-8 relative z-10">
                             <AnimatePresence mode="popLayout">
-                                {filtered.map((skill, i) => {
-                                    const randomRot = (i % 3 === 0) ? -4 : (i % 2 === 0) ? 4 : 0;
-                                    const randomY = (i % 2 === 0) ? [0, -10, 0] : [0, 8, 0];
-                                    const cardColor = i % 3 === 0 ? '#E2D1F9' : i % 2 === 0 ? '#FEFAE0' : '#FAEDCD';
-
-                                    return (
-                                        <motion.div key={`${skill.name}-${activeCategory}`}
-                                            drag dragConstraints={constraintsRef} dragElastic={0.2} dragMomentum={true}
-                                            whileDrag={{ scale: 1.15, rotateZ: randomRot * 2, zIndex: 100, boxShadow: '12px 12px 0px rgba(0,0,0,1)' }}
-                                            whileHover={{ scale: 1.05, rotateZ: randomRot, zIndex: 50 }}
-                                            initial={{ opacity: 0, scale: 0.5, y: 40 }}
-                                            animate={{ opacity: 1, scale: 1, y: randomY, transition: { y: { repeat: Infinity, duration: 4 + (i * 0.2), ease: "easeInOut" } } }}
-                                            exit={{ opacity: 0, scale: 0.3 }}
-                                            transition={{ duration: 0.5, delay: i * 0.04, type: 'spring', stiffness: 200, damping: 15 }}
-                                            className="flex flex-col items-center justify-center gap-4 h-40 rounded-4xl border-4 border-black cursor-grab active:cursor-grabbing select-none relative group bg-white shadow-[6px_6px_0px_#000] hover:shadow-[8px_8px_0px_#000]"
-                                            style={{ transformStyle: 'preserve-3d' }}>
-
-                                            {/* Hover fill */}
-                                            <div className="absolute inset-0 rounded-[1.7rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: cardColor }} />
-
-                                            <span className="text-5xl translate-z-[10px] drop-shadow-md relative z-10">{skill.icon}</span>
-                                            <span className="text-sm font-black uppercase tracking-widest text-center translate-z-[20px] relative z-10 text-black">{skill.name}</span>
-
-                                            <div className="w-20 h-2 rounded-full border-2 border-black translate-z-[15px] bg-white relative z-10 overflow-hidden">
-                                                <div className="h-full bg-black border-r-2 border-black" style={{ width: `${skill.level}%` }} />
-                                            </div>
-                                        </motion.div>
-                                    );
-                                })}
+                                {filtered.map((skill, i) => (
+                                    <SkillCard 
+                                        key={`${skill.name}-${activeCategory}`} 
+                                        skill={skill} 
+                                        index={i} 
+                                        constraintsRef={constraintsRef} 
+                                        activeCategory={activeCategory} 
+                                    />
+                                ))}
                             </AnimatePresence>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </SectionWrapper>
     );
 }
 

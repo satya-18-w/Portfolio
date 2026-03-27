@@ -24,7 +24,7 @@ export default function FloatingTechIcons({ radius = 2.5 }) {
     });
 
     return (
-        <group ref={groupRef} position={[2.2, -0.5, 0]}>
+        <group ref={groupRef} position={[0, -0.5, 0]}>
             {TECH_ICONS.map((tech, i) => {
                 const angle = (i / TECH_ICONS.length) * Math.PI * 2;
                 const x = Math.cos(angle) * radius;
@@ -34,7 +34,7 @@ export default function FloatingTechIcons({ radius = 2.5 }) {
 
                 return (
                     <Float key={tech.name} speed={1.5} rotationIntensity={0.3} floatIntensity={0.5} position={[x, y, z]}>
-                        <Html center transform sprite distanceFactor={12} zIndexRange={[10, 0]}>
+                        <Html center transform sprite distanceFactor={14} zIndexRange={[10, 0]}>
                             <div className="flex items-center justify-center px-4 py-1.5 hover:scale-110 transition-all cursor-crosshair group bg-white border-2 border-black rounded-full"
                                 style={{ boxShadow: '4px 4px 0px #000' }}
                                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = tech.color; }}
