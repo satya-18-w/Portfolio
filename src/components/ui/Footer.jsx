@@ -112,23 +112,61 @@ function TerminalFooter({ theme }) {
 }
 
 /* ── BRUTALIST ────────────────────────────────────────────────── */
+import Magnetic from '../ui/Magnetic';
+
 function BrutalistFooter({ theme }) {
     return (
-        <footer style={{ background: theme.bg, borderTop: `2px solid ${theme.primary}30` }}>
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div>
-                    <h3 className="text-2xl font-black tracking-tighter mb-1" style={{ fontFamily: theme.fontHeading, color: theme.text }}>
-                        SATYAJIT SAMAL
-                    </h3>
-                    <p className="text-xs" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>AI Engineer · Backend Developer</p>
+        <footer className="relative overflow-hidden" style={{ background: theme.bg, borderTop: `1px solid ${theme.surfaceBorder}` }}>
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-12 flex flex-col gap-16 relative z-10">
+                
+                <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 border-b pb-12" style={{ borderColor: theme.surfaceBorder }}>
+                    <div className="flex flex-col max-w-lg">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] mb-4" style={{ color: theme.primary, fontFamily: theme.fontMono }}>
+                            // END OF PAGE
+                        </span>
+                        <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-[0.9]" style={{ fontFamily: theme.fontHeading, color: theme.text }}>
+                            Ready to Build<br/>The Future?
+                        </h3>
+                    </div>
+                    
+                    <Magnetic intensity={0.4}>
+                        <button 
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="w-24 h-24 rounded-full flex flex-col items-center justify-center gap-1 transition-all duration-300 group hover:scale-105"
+                            style={{ background: theme.primary, border: `2px solid ${theme.surfaceBorder}`, color: '#000' }}
+                        >
+                            <svg className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                            <span className="text-[10px] font-black uppercase tracking-widest" style={{ fontFamily: theme.fontMono }}>Top</span>
+                        </button>
+                    </Magnetic>
                 </div>
-                <div className="flex gap-6">
-                    {LINKS.map(l => <a key={l} href={`#${l.toLowerCase()}`} className="text-xs font-bold uppercase tracking-wider hover:opacity-70 transition-all" style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>{l}</a>)}
+
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs" style={{ color: theme.textMuted }}>
+                    <div className="flex items-center gap-6">
+                        {SOCIALS.map(s => (
+                            <Magnetic intensity={0.2} key={s.label}>
+                                <a href={s.href} className="font-bold uppercase tracking-widest transition-colors hover:text-white" style={{ fontFamily: theme.fontMono }}>
+                                    {s.label}
+                                </a>
+                            </Magnetic>
+                        ))}
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-right" style={{ fontFamily: theme.fontMono }}>
+                        <span className="opacity-60">© {new Date().getFullYear()} Satyajit Samal</span>
+                        <span className="hidden md:block opacity-30">|</span>
+                        <span className="opacity-60">Built with React, Three.js & Framer Motion</span>
+                    </div>
                 </div>
             </div>
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-6 text-xs flex justify-between" style={{ color: `${theme.textMuted}80` }}>
-                <span>© 2024 Satyajit Samal</span>
-                <span style={{ fontFamily: theme.fontMono }}>React · Three.js</span>
+
+            {/* Massive background text */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.02] z-0">
+                <h1 className="text-[20vw] font-black tracking-tighter leading-none whitespace-nowrap" style={{ fontFamily: theme.fontHeading, color: '#fff' }}>
+                    SATYAJIT
+                </h1>
             </div>
         </footer>
     );

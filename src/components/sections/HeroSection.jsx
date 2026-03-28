@@ -146,14 +146,14 @@ function CyberHero({ theme, role, mousePos }) {
                     </div>
 
                     <TextReveal delay={0.7}>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4 w-full">
                             <MagneticButton intensity={0.2}>
-                                <a href="#projects" className="inline-block bg-[#E0FBFC] px-8 py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider" style={{ fontFamily: theme.fontHeading }}>
+                                <a href="#projects" className="inline-block bg-[#E0FBFC] px-6 py-3 md:px-8 md:py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider text-center" style={{ fontFamily: theme.fontHeading }}>
                                     View Archive ↓
                                 </a>
                             </MagneticButton>
                             <MagneticButton intensity={0.2}>
-                                <a href="#skills" className="inline-block bg-white px-8 py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider" style={{ fontFamily: theme.fontHeading }}>
+                                <a href="#skills" className="inline-block bg-white px-6 py-3 md:px-8 md:py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider text-center" style={{ fontFamily: theme.fontHeading }}>
                                     Skills Playground
                                 </a>
                             </MagneticButton>
@@ -217,13 +217,13 @@ function MinimalHero({ theme, role, mousePos }) {
                     <motion.div style={{ y: yText }}>
                         <TextReveal delay={0.15}>
                             <h1 className="font-black leading-[0.85] tracking-tighter uppercase"
-                                style={{ fontSize: 'clamp(3.5rem, 11vw, 11rem)', fontFamily: theme.fontHeading, color: theme.text }}>
+                                style={{ fontSize: 'clamp(2.5rem, 11vw, 11rem)', fontFamily: theme.fontHeading, color: theme.text }}>
                                 Satyajit
                             </h1>
                         </TextReveal>
                         <TextReveal delay={0.25}>
                             <h1 className="font-black leading-[0.85] tracking-tighter uppercase"
-                                style={{ fontSize: 'clamp(3.5rem, 11vw, 11rem)', fontFamily: theme.fontHeading, color: theme.primary }}>
+                                style={{ fontSize: 'clamp(2.5rem, 11vw, 11rem)', fontFamily: theme.fontHeading, color: theme.primary }}>
                                 Samal
                             </h1>
                         </TextReveal>
@@ -246,16 +246,16 @@ function MinimalHero({ theme, role, mousePos }) {
 
                     {/* CTAs */}
                     <TextReveal delay={0.5}>
-                        <div className="flex flex-wrap gap-5 mt-12">
+                        <div className="flex flex-col sm:flex-row gap-4 mt-12 w-full">
                             <MagneticButton intensity={0.25}>
-                                <a href="#projects" className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-black tracking-widest uppercase rounded-full transition-all duration-500 hover:shadow-lg hover:scale-[1.03]"
+                                <a href="#projects" className="group inline-flex items-center justify-center gap-3 px-6 py-4 md:px-10 md:py-5 text-[11px] sm:text-sm font-black tracking-widest uppercase rounded-full transition-all duration-500 hover:shadow-lg hover:scale-[1.03] w-full sm:w-auto"
                                     style={{ background: theme.primary, color: '#000' }}>
                                     View Projects
                                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                                 </a>
                             </MagneticButton>
                             <MagneticButton intensity={0.15}>
-                                <a href="#skills" className="px-10 py-5 text-sm font-black tracking-widest uppercase rounded-full border-2 transition-all duration-500 hover:scale-[1.03] backdrop-blur-sm"
+                                <a href="#skills" className="flex items-center justify-center px-6 py-4 md:px-10 md:py-5 text-[11px] sm:text-sm font-black tracking-widest uppercase rounded-full border-2 transition-all duration-500 hover:scale-[1.03] backdrop-blur-sm w-full sm:w-auto"
                                     style={{ borderColor: theme.text, color: theme.text, background: 'rgba(255,255,255,0.4)' }}>
                                     Explore Skills
                                 </a>
@@ -359,14 +359,14 @@ function TerminalHero({ theme, role, mousePos }) {
                 className="relative z-10 flex flex-col text-left">
 
                 <TextReveal delay={0.1}>
-                    <h1 className="font-bold leading-[0.85] tracking-tight uppercase mb-2"
-                        style={{ fontSize: 'clamp(4rem, 12vw, 11rem)', fontFamily: theme.fontMono, color: theme.text }}>
+                    <h1 className="font-bold leading-[0.85] tracking-tight uppercase mb-2 break-all sm:break-normal"
+                        style={{ fontSize: 'clamp(2.5rem, 12vw, 11rem)', fontFamily: theme.fontMono, color: theme.text }}>
                         {"{"}SATYAJIT
                     </h1>
                 </TextReveal>
                 <TextReveal delay={0.2}>
-                    <h1 className="font-bold leading-[0.85] tracking-tight uppercase mb-12"
-                        style={{ fontSize: 'clamp(4rem, 12vw, 11rem)', fontFamily: theme.fontMono, color: theme.primary }}>
+                    <h1 className="font-bold leading-[0.85] tracking-tight uppercase mb-12 break-all sm:break-normal"
+                        style={{ fontSize: 'clamp(2.5rem, 12vw, 11rem)', fontFamily: theme.fontMono, color: theme.primary }}>
                         SAMAL{"}"}
                     </h1>
                 </TextReveal>
@@ -472,11 +472,11 @@ function BasementHero({ theme, role, mousePos }) {
                     </div>
 
                     <h1 className="font-black tracking-tighter leading-[0.8] mb-1 uppercase"
-                        style={{ fontSize: 'clamp(4rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
+                        style={{ fontSize: 'clamp(3rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
                         SATYAJIT
                     </h1>
                     <h1 className="font-black tracking-tighter leading-[0.8] mb-10 uppercase"
-                        style={{ fontSize: 'clamp(4rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
+                        style={{ fontSize: 'clamp(3rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
                         SAMAL
                     </h1>
 
@@ -490,15 +490,15 @@ function BasementHero({ theme, role, mousePos }) {
                             </p>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4 h-max self-end md:justify-end border-l pl-0 md:pl-10" style={{ borderColor: theme.surfaceBorder }}>
+                        <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 h-max self-end md:justify-end border-l pl-0 md:pl-10" style={{ borderColor: theme.surfaceBorder }}>
                             <MagneticButton intensity={0.3}>
-                                <a href="#projects" className="px-10 py-5 text-xs font-black uppercase tracking-[0.2em] transition-all hover:invert"
+                                <a href="#projects" className="flex items-center justify-center px-6 py-4 md:px-10 md:py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-all hover:invert w-full sm:w-auto"
                                     style={{ background: theme.primary, color: '#000', fontFamily: theme.fontMono }}>
                                     View Work
                                 </a>
                             </MagneticButton>
                             <MagneticButton intensity={0.15}>
-                                <a href="#contact" className="px-10 py-5 text-xs font-black uppercase tracking-[0.2em] border transition-all hover:bg-white hover:text-black"
+                                <a href="#contact" className="flex items-center justify-center px-6 py-4 md:px-10 md:py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] border transition-all hover:bg-white hover:text-black w-full sm:w-auto"
                                     style={{ borderColor: theme.text, color: theme.text, fontFamily: theme.fontMono }}>
                                     Contact
                                 </a>

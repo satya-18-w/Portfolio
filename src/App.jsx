@@ -6,11 +6,16 @@ import Loader from './components/ui/Loader';
 import Navbar from './components/ui/Navbar';
 import NeonSwitch from './components/ui/NeonSwitch';
 import Footer from './components/ui/Footer';
+import CursorParticles from './components/ui/CursorParticles';
+import CustomCursor from './components/ui/CustomCursor';
+import ScrollProgress from './components/ui/ScrollProgress';
+import TechMarquee from './components/ui/TechMarquee';
 
 const HeroSection = lazy(() => import('./components/sections/HeroSection'));
 const SkillsSection = lazy(() => import('./components/sections/SkillsSection'));
 const ProjectsSection = lazy(() => import('./components/sections/ProjectsSection'));
 const JourneySection = lazy(() => import('./components/sections/JourneySection'));
+const AboutSection = lazy(() => import('./components/sections/AboutSection'));
 const ContactSection = lazy(() => import('./components/sections/ContactSection'));
 const MetaverseWorld = lazy(() => import('./components/three/metaverse/MetaverseWorld'));
 
@@ -44,11 +49,19 @@ function AppContent() {
             {!loading && !isMetaverse && (
                 <>
                     <Navbar />
+                    <ScrollProgress />
+                    <CursorParticles />
+                    <CustomCursor />
                     <Suspense fallback={null}>
                         <HeroSection />
                     </Suspense>
+                    <TechMarquee direction="left" />
                     <Suspense fallback={null}>
                         <SkillsSection />
+                    </Suspense>
+                    <TechMarquee direction="right" />
+                    <Suspense fallback={null}>
+                        <AboutSection />
                     </Suspense>
                     <Suspense fallback={null}>
                         <ProjectsSection />

@@ -127,7 +127,7 @@ export const SKINS = {
 };
 
 export function ThemeProvider({ children }) {
-    const [themeKey, setThemeKey] = useState('cyber');
+    const [themeKey, setThemeKey] = useState('brutalist');
     const theme = SKINS[themeKey];
 
     const cycleTheme = () => {

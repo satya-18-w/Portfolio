@@ -1,100 +1,84 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-export default function CustomCursor({ themeKey }) {
-    const [isHovering, setIsHovering] = useState(false);
-    const [cursorText, setCursorText] = useState('');
+export default function CustomCursor() {
+    const [isHovered, setIsHovered] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
 
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+    const springConfig = { damping: 25, stiffness: 700 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
         const moveCursor = (e) => {
-            cursorX.set(e.clientX - 16);
-            cursorY.set(e.clientY - 16);
+            cursorX.set(e.clientX - 10);
+            cursorY.set(e.clientY - 10);
         };
 
-        const handleMouseOver = (e) => {
-            const target = e.target;
-            const isClickable = target.closest('a, button, input, textarea, [data-cursor="hover"]');
+        const handleMouseEnter = () => setIsHidden(false);
+        const handleMouseLeave = () => setIsHidden(true);
 
-            if (isClickable) {
-                setIsHovering(true);
-                const customText = target.closest('[data-cursor-text]')?.getAttribute('data-cursor-text');
-                setCursorText(customText || '');
-            } else {
-                setIsHovering(false);
-                setCursorText('');
+        const handleHoverStart = (e) => {
+            const target = e.target;
+            if (
+                target.tagName.toLowerCase() === 'a' ||
+                target.tagName.toLowerCase() === 'button' ||
+                target.closest('a') ||
+                target.closest('button') ||
+                target.classList.contains('cursor-hover') ||
+                target.closest('.cursor-hover')
+            ) {
+                setIsHovered(true);
             }
         };
 
+        const handleHoverEnd = () => {
+            setIsHovered(false);
+        };
+
+        // Hide default cursor globally
+        document.documentElement.style.cursor = 'none';
+
         window.addEventListener('mousemove', moveCursor);
-        window.addEventListener('mouseover', handleMouseOver);
+        document.addEventListener('mouseenter', handleMouseEnter);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        
+        // Use capture phase for faster response
+        document.addEventListener('mouseover', handleHoverStart, true);
+        document.addEventListener('mouseout', handleHoverEnd, true);
 
         return () => {
+            document.documentElement.style.cursor = 'auto';
             window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('mouseover', handleMouseOver);
+            document.removeEventListener('mouseenter', handleMouseEnter);
+            document.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('mouseover', handleHoverStart, true);
+            document.removeEventListener('mouseout', handleHoverEnd, true);
         };
     }, []);
 
-    // Disable custom cursor on touch devices
-    if (typeof window !== 'undefined' && 'ontouchstart' in window) {
-        return null;
-    }
-
-    const isPop = themeKey === 'pop';
-    const isTerminal = themeKey === 'terminal';
+    if (typeof window === 'undefined' || window.innerWidth < 1024) return null; // Disable on touch/mobile devices
 
     return (
         <>
-            {/* The main ring */}
             <motion.div
-                className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none flex items-center justify-center mix-blend-difference"
+                className="fixed top-0 left-0 w-5 h-5 rounded-full pointer-events-none z-9999 mix-blend-difference flex items-center justify-center"
                 style={{
-                    zIndex: 9999,
                     x: cursorXSpring,
                     y: cursorYSpring,
-                    border: '2px solid white',
-                    color: 'white',
+                    backgroundColor: 'white',
+                    opacity: isHidden ? 0 : 1
                 }}
                 animate={{
-                    scale: isHovering ? (cursorText ? 2.5 : 1.5) : 1,
-                    backgroundColor: isHovering ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
-                    mixBlendMode: isHovering ? 'difference' : 'difference'
+                    scale: isHovered ? 2.5 : 1,
                 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                transition={{ duration: 0.15, ease: 'easeOut' }}
             >
-                {/* Optional explicit text inside the cursor (like "VIEW") */}
-                {cursorText && (
-                    <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-[6px] font-black uppercase text-black"
-                    >
-                        {cursorText}
-                    </motion.span>
-                )}
+                {/* Optional inner dot or text on hover could go here */}
             </motion.div>
-
-            {/* The tiny precise dot in the center */}
-            <motion.div
-                className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full pointer-events-none mix-blend-difference bg-white"
-                style={{
-                    zIndex: 9999,
-                    x: useMotionValue(cursorX.get() + 13), // Offset center
-                    y: useMotionValue(cursorY.get() + 13),
-                }}
-                animate={{
-                    x: cursorX.get() + 13,
-                    y: cursorY.get() + 13,
-                    opacity: isHovering ? 0 : 1
-                }}
-                transition={{ type: 'tween', duration: 0 }} // Instant follow for the dot
-            />
         </>
     );
 }

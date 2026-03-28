@@ -246,3 +246,13 @@ section {
 .link-underline:hover::after {
     width: 100%;
 }
+
+/* ---- SkillCard shine spin ---- */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ---- Scrollbar hide (sidebar) ---- */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

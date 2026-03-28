@@ -16,7 +16,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className={`flex flex-col w-full md:w-[420px] rounded-2xl shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] border p-6 md:p-8 ${isEven ? 'ml-auto' : 'mr-auto'}`}
+            className={`flex flex-col w-full md:w-[420px] rounded-2xl shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] border p-4 sm:p-5 md:p-8 ${isEven ? 'md:ml-auto' : 'md:mr-auto'}`}
             style={{ backgroundColor: theme.bgAlt || '#fff', borderColor: `${theme.primary}33` }}
         >
             <div className="flex flex-col gap-3">
@@ -66,7 +66,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-            className={`py-6 ${isEven ? 'mr-auto pl-16 md:pl-24 lg:pl-32' : 'ml-auto pr-16 md:pr-24 lg:pr-32'}`}
+            className={`py-6 ${isEven ? 'mr-auto pl-8 sm:pl-12 md:pl-24 lg:pl-32' : 'ml-auto pr-8 sm:pr-12 md:pr-24 lg:pr-32'}`}
             style={{ color: `${theme.primary}66` }}
         >
             {milestone.icon}
@@ -81,7 +81,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
             </div>
 
             {/* Timeline Element (Mobile: fixed left, Desktop: centered column) */}
-            <div className="absolute left-0 top-0 h-full w-12 md:relative md:w-auto md:h-full flex justify-center shrink-0">
+            <div className="absolute left-0 top-0 h-full w-12 md:w-auto md:relative md:h-full flex justify-center shrink-0">
                 <TimelineNode />
             </div>
 
@@ -89,7 +89,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
             <div className={`justify-start flex w-full`}>
                 <div className="w-full">
                     {/* On mobile, ALWAYS show the card regardless of isEven. */}
-                    <div className="block md:hidden pl-[30px] sm:pl-[40px] pt-4">
+                    <div className="block md:hidden pl-[40px] sm:pl-[48px] pt-4">
                         <CardContent />
                     </div>
                     <div className="hidden md:flex w-full">

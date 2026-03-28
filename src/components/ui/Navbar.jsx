@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from '../ui/Magnetic';
 import { useTheme, SKINS } from '../../context/ThemeContext';
 
-const NAV_LINKS = ['Home', 'Skills', 'Projects', 'Journey', 'Contact'];
+const NAV_LINKS = ['Home', 'About', 'Skills', 'Projects', 'Journey', 'Contact'];
 
 export default function Navbar() {
     const { theme, themeKey, setThemeKey } = useTheme();
@@ -14,7 +14,7 @@ export default function Navbar() {
 
     // Observe active section
     useEffect(() => {
-        const ids = ['hero', 'skills', 'projects', 'journey', 'contact'];
+        const ids = ['hero', 'about', 'skills', 'projects', 'journey', 'contact'];
         const obs = new IntersectionObserver(
             (entries) => entries.forEach(e => e.isIntersecting && setActiveSection(e.target.id)),
             { rootMargin: '-40% 0px -40% 0px' }
@@ -58,22 +58,24 @@ export default function Navbar() {
                 }}
             >
                 {/* Logo */}
-                <a href="#hero" className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 flex items-center justify-center font-black text-sm transition-transform hover:scale-105 overflow-hidden"
-                        style={{
-                            background: theme.primary,
-                            color: '#000',
-                            borderRadius: isPop ? '50%' : '12px',
-                            border: isPop ? '2px solid #000' : 'none',
-                            boxShadow: isPop ? '3px 3px 0px #000' : 'none'
-                        }}>
-                        <img src="/images/image.png" alt="Satyajit Samal Logo" className="w-10 h-10 object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
-                        <span style={{ display: 'none' }}>SS</span>
-                    </div>
-                    <span className="font-bold text-base hidden sm:block" style={{ color: textColor, fontFamily: theme.fontHeading }}>
-                        Satyajit Samal
-                    </span>
-                </a>
+                <Magnetic intensity={0.15}>
+                    <a href="#hero" className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 flex items-center justify-center font-black text-sm transition-transform hover:scale-105 overflow-hidden"
+                            style={{
+                                background: theme.primary,
+                                color: '#000',
+                                borderRadius: isPop ? '50%' : '12px',
+                                border: isPop ? '2px solid #000' : 'none',
+                                boxShadow: isPop ? '3px 3px 0px #000' : 'none'
+                            }}>
+                            <img src="/images/image.png" alt="Satyajit Samal Logo" className="w-10 h-10 object-cover" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+                            <span style={{ display: 'none' }}>SS</span>
+                        </div>
+                        <span className="font-bold text-base hidden sm:block" style={{ color: textColor, fontFamily: theme.fontHeading }}>
+                            Satyajit Samal
+                        </span>
+                    </a>
+                </Magnetic>
 
                 {/* Desktop nav links */}
                 <ul className="hidden md:flex items-center gap-8">
@@ -129,32 +131,34 @@ export default function Navbar() {
                 <div className="flex items-center gap-4 sm:gap-6" ref={panelRef}>
                     {/* Theme picker button */}
                     <div className="relative">
-                        <button
-                            onClick={() => setThemeOpen(p => !p)}
-                            className="flex items-center gap-2 px-3 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000] relative"
-                            style={{
-                                background: isPop ? '#FEFAE0' : theme.surface,
-                                border: isPop ? '2px solid #000' : `1px solid ${theme.surfaceBorder}`,
-                                borderRadius: isPop ? '12px' : '12px',
-                                color: isPop ? '#000' : theme.primary,
-                                fontFamily: isPop ? theme.fontHeading : theme.fontMono,
-                                boxShadow: isPop ? '4px 4px 0px #000' : 'none',
-                            }}
-                            title="Switch UI Skin"
-                        >
-                            {/* "New Themes Available" Indicator */}
-                            <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full animate-ping" style={{ background: theme.primary, opacity: 0.6 }} />
-                            <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full" style={{ background: theme.primary, border: isPop ? '1px solid #000' : 'none' }} />
+                        <Magnetic intensity={0.2}>
+                            <button
+                                onClick={() => setThemeOpen(p => !p)}
+                                className="flex items-center gap-2 px-3 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000] relative"
+                                style={{
+                                    background: isPop ? '#FEFAE0' : theme.surface,
+                                    border: isPop ? '2px solid #000' : `1px solid ${theme.surfaceBorder}`,
+                                    borderRadius: isPop ? '12px' : '12px',
+                                    color: isPop ? '#000' : theme.primary,
+                                    fontFamily: isPop ? theme.fontHeading : theme.fontMono,
+                                    boxShadow: isPop ? '4px 4px 0px #000' : 'none',
+                                }}
+                                title="Switch UI Skin"
+                            >
+                                {/* "New Themes Available" Indicator */}
+                                <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full animate-ping" style={{ background: theme.primary, opacity: 0.6 }} />
+                                <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full" style={{ background: theme.primary, border: isPop ? '1px solid #000' : 'none' }} />
 
-                            <div className="hidden sm:flex flex-col items-start pr-2 border-r" style={{ borderColor: isPop ? '#000' : theme.surfaceBorder }}>
-                                <span className="text-[8px] leading-none opacity-60 uppercase tracking-widest block mb-0.5" style={{ fontFamily: theme.fontMono }}>Theme</span>
-                                <span className="leading-none uppercase tracking-widest">{SKINS[themeKey].name}</span>
-                            </div>
-                            <span className="text-sm">{SKINS[themeKey].emoji}</span>
-                            <svg className={`w-3 h-3 transition-transform duration-200 ${themeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
+                                <div className="hidden sm:flex flex-col items-start pr-2 border-r" style={{ borderColor: isPop ? '#000' : theme.surfaceBorder }}>
+                                    <span className="text-[8px] leading-none opacity-60 uppercase tracking-widest block mb-0.5" style={{ fontFamily: theme.fontMono }}>Theme</span>
+                                    <span className="leading-none uppercase tracking-widest">{SKINS[themeKey].name}</span>
+                                </div>
+                                <span className="text-sm">{SKINS[themeKey].emoji}</span>
+                                <svg className={`w-3 h-3 transition-transform duration-200 ${themeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </Magnetic>
 
                         {/* Theme dropdown panel */}
                         <AnimatePresence>
@@ -239,13 +243,15 @@ export default function Navbar() {
                     </Magnetic>
 
                     {/* Mobile hamburger */}
-                    <button className="md:hidden p-2 rounded-lg" style={{ color: theme.text }}
-                        onClick={() => setMobileOpen(p => !p)}>
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d={mobileOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
-                        </svg>
-                    </button>
+                    <Magnetic intensity={0.5}>
+                        <button className="md:hidden p-2 rounded-lg" style={{ color: theme.text }}
+                            onClick={() => setMobileOpen(p => !p)}>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                    d={mobileOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
+                            </svg>
+                        </button>
+                    </Magnetic>
                 </div>
             </nav>
 
