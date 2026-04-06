@@ -34,7 +34,7 @@ export default function ContactSection() {
             style={{ background: sectionBg, color: headingColor, borderColor: isBasement ? theme.surfaceBorder : 'transparent' }}
         >
             <div className="w-full max-w-5xl mx-auto px-6 lg:px-12 z-10">
-                
+
                 {/* ── MASSIVE HEADER ── */}
                 <div className="flex flex-col mb-20 md:mb-32 w-full">
                     <div className="flex items-center gap-4 mb-8">
@@ -43,8 +43,8 @@ export default function ContactSection() {
                             Available for hire
                         </span>
                     </div>
-                    
-                    <h2 
+
+                    <h2
                         className="text-[clamp(4rem,10vw,12rem)] font-black uppercase tracking-tighter leading-[0.8] mb-8"
                         style={{ fontFamily: theme.fontHeading, color: headingColor }}
                     >
@@ -52,15 +52,16 @@ export default function ContactSection() {
                     </h2>
 
                     <div className="flex flex-wrap gap-6 border-t pt-8" style={{ borderColor: borderColor }}>
-                        <a href="mailto:satyajit@iiit-bh.ac.in" className="text-sm md:text-base font-medium transition-colors hover:text-white" style={{ color: mutedColor }}>
-                            satyajit@iiit-bh.ac.in
+                        <a href="mailto:satyajitsamal198076@gmail.com" className="text-sm md:text-base font-medium transition-colors hover:text-white" style={{ color: mutedColor }}>
+                            satyajitsamal198076@gmail.com
+
                         </a>
                         <span className="text-white/20 hidden md:block">/</span>
                         <a href="https://github.com/satya-18-w" target="_blank" rel="noopener noreferrer" className="text-sm md:text-base font-medium transition-colors hover:text-white" style={{ color: mutedColor }}>
                             GitHub ↗
                         </a>
                         <span className="text-white/20 hidden md:block">/</span>
-                        <a href="https://linkedin.com/in/satyajit-samal" target="_blank" rel="noopener noreferrer" className="text-sm md:text-base font-medium transition-colors hover:text-white" style={{ color: mutedColor }}>
+                        <a href="https://www.linkedin.com/in/satyajit-samal-b125a02a4" target="_blank" rel="noopener noreferrer" className="text-sm md:text-base font-medium transition-colors hover:text-white" style={{ color: mutedColor }}>
                             LinkedIn ↗
                         </a>
                     </div>
@@ -68,7 +69,7 @@ export default function ContactSection() {
 
                 {/* ── ULTRA MINIMAL FORM ── */}
                 <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
-                    
+
                     <div className="lg:col-span-4 flex flex-col justify-end">
                         <p className="text-sm leading-relaxed max-w-sm" style={{ color: mutedColor, fontFamily: theme.fontBody }}>
                             Whether you have an idea for a massive distributed system, a highly-available machine learning pipeline, or just want to chat about code. Minimum response time, maximum bandwidth.
@@ -77,7 +78,7 @@ export default function ContactSection() {
 
                     <div className="lg:col-span-8">
                         <form onSubmit={handleSubmit} className="flex flex-col w-full">
-                            
+
                             <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full mb-12">
                                 {/* Name Input */}
                                 <div className="relative w-full group">
@@ -163,10 +164,10 @@ export default function ContactSection() {
 
                 </div>
             </div>
-            
+
             {/* Basement raw noise overlay */}
             {isBasement && (
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0" 
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
                 </div>
             )}
