@@ -128,13 +128,13 @@ export default function Navbar() {
                 </ul>
 
                 {/* Right: theme switcher + CTA */}
-                <div className="flex items-center gap-4 sm:gap-6" ref={panelRef}>
+                <div className="flex items-center  gap-4 sm:gap-6" ref={panelRef}>
                     {/* Theme picker button */}
                     <div className="relative">
                         <Magnetic intensity={0.2}>
                             <button
                                 onClick={() => setThemeOpen(p => !p)}
-                                className="flex items-center gap-2 px-3 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000] relative"
+                                className="flex items-center gap-1 px-5 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000] relative"
                                 style={{
                                     background: isPop ? '#FEFAE0' : theme.surface,
                                     border: isPop ? '2px solid #000' : `1px solid ${theme.surfaceBorder}`,
@@ -153,10 +153,13 @@ export default function Navbar() {
                                     <span className="text-[8px] leading-none opacity-60 uppercase tracking-widest block mb-0.5" style={{ fontFamily: theme.fontMono }}>Theme</span>
                                     <span className="leading-none uppercase tracking-widest">{SKINS[themeKey].name}</span>
                                 </div>
-                                <span className="text-sm">{SKINS[themeKey].emoji}</span>
-                                <svg className={`w-3 h-3 transition-transform duration-200 ${themeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                                </svg>
+
+                                <div className="flex items-center justify-center gap-1.5 pl-1.5 sm:pl-2">
+                                    <span className="text-base leading-none translate-y-[-1px]">{SKINS[themeKey].emoji}</span>
+                                    <svg className={`w-3 h-3 transition-transform duration-200 opacity-80 group-hover:opacity-100 ${themeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
                             </button>
                         </Magnetic>
 
@@ -224,18 +227,18 @@ export default function Navbar() {
                             )}
                         </AnimatePresence>
                     </div>
-
                     {/* CTA button */}
                     <Magnetic intensity={0.3}>
                         <a href="#contact"
-                            className="hidden md:inline-flex items-center gap-2 px-8 py-3.5 text-sm md:text-base font-black uppercase tracking-widest transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000]"
+                            className="hidden md:inline-flex items-center gap-2 px-8 py-3.5 text-sm md:text-base font-black uppercase  pl-3    tracking-widest transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000]"
                             style={{
                                 background: isPop ? '#E2D1F9' : theme.primary,
                                 color: '#000',
-                                borderRadius: theme.btnStyle === 'sharp' ? '4px' : theme.btnStyle === 'pill' ? '9999px' : '999px',
+                                borderRadius: theme.btnStyle === 'sharp' ? '4px' : theme.btnStyle === 'pill' ? '9999px' : '6px',
                                 border: isPop ? '2px solid #000' : 'none',
-                                boxShadow: isPop ? '4px 4px 0px #000' : `0 0 20px ${theme.primary}30`,
+                                boxShadow: isPop ? '4px 4px 0px #000' : 'none',
                                 fontFamily: isPop ? theme.fontHeading : theme.fontMono,
+                                lineHeight: '1',
                             }}
                         >
                             {theme.sectionStyle === 'terminal' ? '> Hire Me' : "LET'S TALK ⚡"}

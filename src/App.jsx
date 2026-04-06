@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Loader from './components/ui/Loader';
@@ -18,6 +19,7 @@ const JourneySection = lazy(() => import('./components/sections/JourneySection')
 const AboutSection = lazy(() => import('./components/sections/AboutSection'));
 const ContactSection = lazy(() => import('./components/sections/ContactSection'));
 const MetaverseWorld = lazy(() => import('./components/three/metaverse/MetaverseWorld'));
+const ProjectDetailPage = lazy(() => import('./components/pages/ProjectDetailPage'));
 
 function AppContent() {
     const [loading, setLoading] = useState(true);
@@ -37,44 +39,59 @@ function AppContent() {
                 {loading && <Loader key="loader" />}
             </AnimatePresence>
 
-            {!loading && isMetaverse && (
-                <>
-                    <Suspense fallback={null}>
-                        <MetaverseWorld />
-                    </Suspense>
-                    <NeonSwitch />
-                </>
-            )}
-
-            {!loading && !isMetaverse && (
-                <>
-                    <Navbar />
-                    <ScrollProgress />
-                    <CursorParticles />
-                    <CustomCursor />
-                    <Suspense fallback={null}>
-                        <HeroSection />
-                    </Suspense>
-                    <TechMarquee direction="left" />
-                    <Suspense fallback={null}>
-                        <SkillsSection />
-                    </Suspense>
-                    <TechMarquee direction="right" />
-                    <Suspense fallback={null}>
-                        <AboutSection />
-                    </Suspense>
-                    <Suspense fallback={null}>
-                        <ProjectsSection />
-                    </Suspense>
-                    <Suspense fallback={null}>
-                        <JourneySection />
-                    </Suspense>
-                    <Suspense fallback={null}>
-                        <ContactSection />
-                    </Suspense>
-                    <Footer />
-                    <NeonSwitch />
-                </>
+            {!loading && (
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            isMetaverse ? (
+                                <>
+                                    <Suspense fallback={null}>
+                                        <MetaverseWorld />
+                                    </Suspense>
+                                    <NeonSwitch />
+                                </>
+                            ) : (
+                                <>
+                                    <Navbar />
+                                    <ScrollProgress />
+                                    <CursorParticles />
+                                    <CustomCursor />
+                                    <Suspense fallback={null}>
+                                        <HeroSection />
+                                    </Suspense>
+                                    <TechMarquee direction="left" />
+                                    <Suspense fallback={null}>
+                                        <SkillsSection />
+                                    </Suspense>
+                                    <TechMarquee direction="right" />
+                                    <Suspense fallback={null}>
+                                        <AboutSection />
+                                    </Suspense>
+                                    <Suspense fallback={null}>
+                                        <ProjectsSection />
+                                    </Suspense>
+                                    <Suspense fallback={null}>
+                                        <JourneySection />
+                                    </Suspense>
+                                    <Suspense fallback={null}>
+                                        <ContactSection />
+                                    </Suspense>
+                                    <Footer />
+                                    <NeonSwitch />
+                                </>
+                            )
+                        }
+                    />
+                    <Route
+                        path="/project/:slug"
+                        element={
+                            <Suspense fallback={null}>
+                                <ProjectDetailPage />
+                            </Suspense>
+                        }
+                    />
+                </Routes>
             )}
         </div>
     );

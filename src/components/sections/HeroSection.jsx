@@ -82,7 +82,7 @@ function ScrollProgress() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// SKIN: CYBER — massive overlapping typography and blended avatar
+// SKIN: CYBER — massive typography and blended avatar (Clean & Smooth)
 // ─────────────────────────────────────────────────────────────────────
 function CyberHero({ theme, role, mousePos }) {
     const { scrollY } = useScroll();
@@ -90,83 +90,96 @@ function CyberHero({ theme, role, mousePos }) {
     const yAvatar = useTransform(scrollY, [0, 1000], [0, 200]);
 
     return (
-        <SectionWrapper id="hero" className="w-full min-h-[95vh] flex items-center pt-24 overflow-visible">
-            {/* BACKGROUND MARQUEE */}
-            <div className="absolute top-1/4 left-0 right-0 z-bg opacity-[0.04] pointer-events-none transform -rotate-3 overflow-hidden whitespace-nowrap">
-                <Marquee text="CREATIVE DEVELOPER • AI ENGINEER • BACKEND ARCHITECT •" speed={30} className="text-[12rem] font-black" />
-            </div>
-            <div className="absolute bottom-1/4 left-0 right-0 z-bg opacity-[0.04] pointer-events-none transform rotate-2 overflow-hidden whitespace-nowrap">
-                <Marquee direction="right" text="DISTRIBUTED SYSTEMS • REACT THREE FIBER •" speed={40} className="text-[10rem] font-black" />
-            </div>
+        <SectionWrapper id="hero" className="w-full min-h-[95vh] flex items-center pt-24 overflow-visible relative">
 
-            {/* WATER DROPLET HERO BACKGROUND */}
-            <WaterDropletBackground />
+            {/* SUBTLE GRID BACKGROUND */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-25"
+                style={{
+                    backgroundImage: `radial-gradient(${theme.primary} 1px, transparent 1px)`,
+                    backgroundSize: '40px 40px'
+                }}
+            />
 
-            <Container className="grid grid-cols-1 lg:grid-cols-2 lg:gap-0 items-center relative h-full">
-                
-                {/* LEFT: Text Content */}
-                <motion.div style={{ y: yText }} className="flex flex-col items-start justify-center z-base w-full relative z-20">
-                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5">
-                        <TextReveal delay={0.1}>
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-2 shadow-[4px_4px_0px_#000] bg-white">
-                                <span className="font-mono text-xl md:text-2xl font-black uppercase text-black">The</span>
-                            </div>
-                        </TextReveal>
-                        <TextReveal delay={0.2}>
-                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
-                                Unstoppable
-                            </h1>
-                        </TextReveal>
-                    </div>
+            <Container className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 relative h-full w-full z-10 px-6 lg:px-12">
 
-                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2 md:mb-5">
+                {/* LEFT: Text Content matching the reference image */}
+                <motion.div style={{ y: yText }} className="flex flex-col items-start justify-center z-20 w-full mt-12 lg:mt-0">
+
+                    {/* SYSTEM_INIT BADGE */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="flex items-center gap-2 px-3 py-1 mb-[40px] rounded-sm"
+                        style={{ background: '#111', border: `1px solid ${theme.surfaceBorder}` }}
+                    >
+                        <div className="w-[6px] h-[6px] rounded-full animate-pulse" style={{ background: theme.primary }} />
+                        <span className="text-[10px] font-mono tracking-widest uppercase" style={{ color: theme.primary }}>
+                            100% SYSTEM_INIT
+                        </span>
+                    </motion.div>
+
+                    {/* HUGE TYPOGRAPHY */}
+                    <div className="mb-[40px] flex flex-col items-start">
                         <TextReveal delay={0.3}>
-                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase text-black" style={{ fontFamily: theme.fontMono }}>
-                                AI Engineer
+                            <h1 className="font-black tracking-tighter uppercase leading-[0.85]"
+                                style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', fontFamily: theme.fontHeading, color: '#f8f8f8' }}>
+                                CREATIVE
                             </h1>
                         </TextReveal>
                         <TextReveal delay={0.4}>
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black rotate-3 shadow-[4px_4px_0px_#000] bg-white">
-                                <span className="font-mono text-xl md:text-2xl font-black text-black">{'&'}</span>
-                            </div>
-                        </TextReveal>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-16">
-                        <TextReveal delay={0.5}>
-                            <div className="px-3 py-1 md:px-5 md:py-1.5 rounded-full border-2 border-black -rotate-1 shadow-[4px_4px_0px_#000] bg-white">
-                                <span className="font-mono text-xl md:text-2xl font-black uppercase text-black">Backend</span>
-                            </div>
-                        </TextReveal>
-                        <TextReveal delay={0.6}>
-                            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter uppercase text-black" style={{ fontFamily: theme.fontHeading }}>
-                                Architect
+                            <h1 className="font-black tracking-tighter uppercase leading-[0.85] flex"
+                                style={{ fontSize: 'clamp(4rem, 8vw, 9rem)', fontFamily: theme.fontHeading, color: '#f8f8f8' }}>
+                                DEVELOPER<span className="animate-pulse" style={{ color: theme.primary }}>_</span>
                             </h1>
                         </TextReveal>
                     </div>
 
-                    <TextReveal delay={0.7}>
-                        <div className="flex flex-col sm:flex-row gap-4 w-full">
+                    {/* SUBTITLE */}
+                    <TextReveal delay={0.6}>
+                        <p className="text-lg md:text-2xl leading-relaxed max-w-xl mb-[60px]" style={{ color: theme.textMuted, fontFamily: theme.fontBody }}>
+                            Engineering immersive digital architectures at the intersection of performance and aesthetics.
+                        </p>
+                    </TextReveal>
+
+                    {/* BUTTON & METADATA */}
+                    <TextReveal delay={0.8}>
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 w-full">
+                            {/* SOLID BUTTON */}
                             <MagneticButton intensity={0.2}>
-                                <a href="#projects" className="inline-block bg-[#E0FBFC] px-6 py-3 md:px-8 md:py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider text-center" style={{ fontFamily: theme.fontHeading }}>
-                                    View Archive ↓
+                                <a href="#projects" className="inline-flex items-center gap-3 px-8 py-4 font-black uppercase tracking-widest text-[#000] border border-transparent hover:-translate-y-1 transition-transform"
+                                    style={{ background: theme.primary, fontFamily: theme.fontMono, fontSize: '13px' }}>
+                                    EXPLORE_WORK <span>&rarr;</span>
                                 </a>
                             </MagneticButton>
-                            <MagneticButton intensity={0.2}>
-                                <a href="#skills" className="inline-block bg-white px-6 py-3 md:px-8 md:py-4 font-bold text-black border-2 border-black rounded-full shadow-[4px_4px_0px_#000] hover:shadow-[2px_2px_0px_#000] hover:translate-y-[2px] hover:translate-x-[2px] transition-all uppercase tracking-wider text-center" style={{ fontFamily: theme.fontHeading }}>
-                                    Skills Playground
-                                </a>
-                            </MagneticButton>
+
+                            {/* VERSION LOCALE CODES */}
+                            <div className="flex flex-col gap-1 sm:border-l pl-0 sm:pl-6 text-[9px] sm:text-[10px] uppercase font-mono tracking-[0.2em]"
+                                style={{ borderColor: theme.surfaceBorder, color: theme.textMuted }}>
+                                <div className="flex items-center gap-6">
+                                    <span style={{ color: '#666' }}>VERSION</span>
+                                    <span>2024.1.0</span>
+                                </div>
+                                <div className="flex items-center gap-6">
+                                    <span style={{ color: '#666' }}>LOCALE</span>
+                                    <span>NETWORK_EDGE</span>
+                                </div>
+                                <div className="flex items-center gap-6">
+                                    <span style={{ color: '#666' }}>ROLE</span>
+                                    <span>{role}</span>
+                                </div>
+                            </div>
                         </div>
                     </TextReveal>
                 </motion.div>
 
                 {/* RIGHT: 3D Visual */}
-                <motion.div style={{ y: yAvatar }} className="relative w-[120%] -ml-[10%] aspect-square md:h-[750px] flex items-center justify-center z-float scale-110 lg:scale-125 transition-transform duration-1000">
-                    <Canvas camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: true, alpha: true }} dpr={[1, 1.5]}>
+                <motion.div style={{ y: yAvatar }} className="relative w-full aspect-square md:h-[650px] flex items-center justify-center lg:justify-end z-10 pointer-events-none lg:pointer-events-auto">
+                    <Canvas className="scale-110 lg:scale-125 transition-transform duration-1000" camera={{ position: [0, 0, 8], fov: 45 }} gl={{ antialias: true, alpha: true }} dpr={[1, 1.5]}>
                         <AvatarScene mousePos={mousePos} theme={theme} />
                     </Canvas>
                 </motion.div>
+
             </Container>
         </SectionWrapper>
     );
@@ -419,20 +432,18 @@ function TerminalHero({ theme, role, mousePos }) {
 // ─────────────────────────────────────────────────────────────────────
 function BasementHero({ theme, role, mousePos }) {
     const { scrollY } = useScroll();
-    const yText = useTransform(scrollY, [0, 1000], [0, 150]);
-    const yAvatar = useTransform(scrollY, [0, 1000], [0, 420]);
-
+    const yText = useTransform(scrollY, [0, 1000], [0, 90]);
+    const yAvatar = useTransform(scrollY, [0, 1000], [0, 240]);
     return (
         <div className="w-full flex justify-center items-center min-h-screen pt-16 relative">
             {/* Full-width structural grid frame */}
             <div className="absolute inset-0 z-0 pointer-events-none border-x border-b" style={{ borderColor: theme.surfaceBorder, margin: '0 2rem' }}>
                 <div className="absolute top-1/4 left-0 w-full h-px" style={{ background: theme.surfaceBorder }} />
-                <div className="absolute bottom-1/4 left-0 w-full h-px" style={{ background: theme.surfaceBorder }} />
-                <div className="absolute top-0 left-1/3 w-px h-full" style={{ background: theme.surfaceBorder }} />
+                <div className="hidden md:block absolute top-0 left-1/3 w-px h-full" style={{ background: theme.surfaceBorder }} />
             </div>
 
             {/* MARQUEE TOP */}
-            <div className="absolute top-[80px] left-0 w-full z-10 border-y py-3 bg-black flex overflow-hidden" style={{ borderColor: theme.surfaceBorder }}>
+            <div className="hidden md:flex absolute top-[80px] left-0 w-full z-10 border-y py-3 bg-black overflow-hidden" style={{ borderColor: theme.surfaceBorder }}>
                 <div className="flex w-full overflow-hidden whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: theme.primary, fontFamily: theme.fontMono }}>
                     <motion.div
                         className="flex min-w-full shrink-0"
@@ -444,10 +455,14 @@ function BasementHero({ theme, role, mousePos }) {
                 </div>
             </div>
 
-            <div className="max-w-7xl w-full mx-auto px-6 lg:px-12 relative z-10 flex flex-col justify-center min-h-[90vh]">
+            <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-12 relative z-10 flex flex-col justify-center min-h-[88vh] md:min-h-[90vh]">
+
+                {/* Soft text backing for mobile readability over portrait image */}
+                <div className="absolute inset-y-0 left-0 w-full md:w-[72%] pointer-events-none"
+                    style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.75), rgba(0,0,0,0.38), rgba(0,0,0,0))' }} />
 
                 {/* BACKGROUND AVATAR */}
-                <motion.div style={{ y: yAvatar }} className="absolute right-0 top-[20%] w-[120vw] sm:w-[90vw] lg:w-[60vw] h-screen pointer-events-none z-0 overflow-hidden mix-blend-luminosity opacity-[0.35]">
+                <motion.div style={{ y: yAvatar }} className="absolute right-0 top-[18%] sm:top-[16%] w-[130vw] sm:w-[90vw] lg:w-[56vw] h-screen pointer-events-none z-0 overflow-hidden mix-blend-luminosity opacity-[0.12] sm:opacity-[0.16] md:opacity-[0.25]">
                     <motion.img
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
@@ -463,63 +478,35 @@ function BasementHero({ theme, role, mousePos }) {
                 </motion.div>
 
                 {/* FOREGROUND CONTENT */}
-                <motion.div style={{ y: yText }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-                    className="relative z-10 flex flex-col mt-20">
+                <motion.div style={{ y: yText }} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}
+                    className="relative z-10 flex flex-col mt-14 md:mt-20 max-w-4xl pr-1 sm:pr-0">
 
                     <div className="w-max px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-6 border"
                         style={{ borderColor: theme.surfaceBorder, color: theme.textMuted, fontFamily: theme.fontMono }}>
-                        Available / 2024
+                        Available for internships • 2026
                     </div>
 
-                    <h1 className="font-black tracking-tighter leading-[0.8] mb-1 uppercase"
-                        style={{ fontSize: 'clamp(3rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
-                        SATYAJIT
-                    </h1>
-                    <h1 className="font-black tracking-tighter leading-[0.8] mb-10 uppercase"
-                        style={{ fontSize: 'clamp(3rem, 15vw, 15rem)', fontFamily: theme.fontHeading, color: theme.text }}>
-                        SAMAL
+                    <h1 className="font-black tracking-tighter leading-[0.92] mb-5 md:mb-8 uppercase max-w-4xl"
+                        style={{ fontSize: 'clamp(1.9rem, 9vw, 6.8rem)', fontFamily: theme.fontHeading, color: theme.text }}>
+                        <span className="block">BUILDING SCALABLE SYSTEMS</span>
+                        <span className="block" style={{ color: theme.primary }}>& AI APPLICATIONS</span>
                     </h1>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t pt-10" style={{ borderColor: theme.surfaceBorder }}>
-                        <div>
-                            <p className="text-3xl font-black uppercase mb-3 leading-none" style={{ color: theme.primary, fontFamily: theme.fontHeading }}>
-                                {role || 'AI Engineer'}
-                            </p>
-                            <p className="text-base font-medium leading-relaxed max-w-sm" style={{ color: theme.textMuted, fontFamily: theme.fontBody }}>
-                                Engineering distributed systems and LLM-powered applications. Raw performance, robust architecture.
-                            </p>
-                        </div>
+                    <div className="border-t pt-6 md:pt-8" style={{ borderColor: theme.surfaceBorder }}>
+                        <p className="text-[15px] md:text-lg font-medium leading-relaxed max-w-2xl" style={{ color: theme.textMuted, fontFamily: theme.fontBody }}>
+                            I engineer distributed systems, real-time architectures, and ML-powered platforms with a focus on performance, reliability, and scalability. From low-level networking to production-grade ML systems, I build software that actually works at scale.
+                        </p>
 
-                        <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-4 h-max self-end md:justify-end border-l pl-0 md:pl-10" style={{ borderColor: theme.surfaceBorder }}>
-                            <MagneticButton intensity={0.3}>
-                                <a href="#projects" className="flex items-center justify-center px-6 py-4 md:px-10 md:py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-all hover:invert w-full sm:w-auto"
-                                    style={{ background: theme.primary, color: '#000', fontFamily: theme.fontMono }}>
-                                    View Work
-                                </a>
-                            </MagneticButton>
-                            <MagneticButton intensity={0.15}>
-                                <a href="#contact" className="flex items-center justify-center px-6 py-4 md:px-10 md:py-5 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] border transition-all hover:bg-white hover:text-black w-full sm:w-auto"
-                                    style={{ borderColor: theme.text, color: theme.text, fontFamily: theme.fontMono }}>
-                                    Contact
-                                </a>
-                            </MagneticButton>
+                        <div className="mt-5 md:mt-6 inline-flex items-center px-3.5 py-2 border rounded-full"
+                            style={{ borderColor: `${theme.primary}55`, color: theme.primary }}>
+                            <p className="text-[9px] md:text-xs uppercase tracking-[0.18em] font-bold" style={{ fontFamily: theme.fontMono }}>
+                                {role || 'Distributed Systems Engineer'}
+                            </p>
                         </div>
                     </div>
                 </motion.div>
             </div>
 
-            {/* MARQUEE BOTTOM */}
-            <div className="absolute bottom-0 left-0 w-full z-10 border-y py-3 bg-black flex overflow-hidden" style={{ borderColor: theme.surfaceBorder }}>
-                <div className="flex w-full overflow-hidden whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: theme.text, opacity: 0.5, fontFamily: theme.fontMono }}>
-                    <motion.div
-                        className="flex min-w-full shrink-0"
-                        animate={{ x: ['-100%', '0%'] }}
-                        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-                    >
-                        {Array(8).fill("SCROLL TO EXPLORE · NO EXCESS · PURE LOGIC · ").map((txt, i) => <span key={i} className="pl-4">{txt}</span>)}
-                    </motion.div>
-                </div>
-            </div>
         </div>
     );
 }

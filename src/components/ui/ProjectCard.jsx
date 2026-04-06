@@ -9,29 +9,30 @@ import Magnetic from './Magnetic';
  */
 export default function ProjectCard({ project, index, theme }) {
     return (
-        <motion.div 
-            initial={{ opacity: 0, y: 50 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true, margin: "-100px" }} 
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="w-full max-w-6xl mx-auto"
         >
-            <div 
-                className="group relative rounded-[2.5rem] p-6 lg:p-12 transition-transform duration-500 hover:-translate-y-2 bg-white"
+            <div
+                className="group relative rounded-[2.5rem] p-10 lg:p-12 transition-transform duration-500 
+                pr-10 lg:pr-12 hover:-translate-y-2 bg-white"
                 style={{
-                    border: '3px solid #000',
+                    border: '5px solid #000',
                     boxShadow: '12px 12px 0px rgba(0,0,0,1)'
                 }}
             >
                 <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 lg:gap-16 relative z-10">
-                    
+
                     {/* Visual Area */}
                     <div data-cursor="hover" data-cursor-text="VIEW" className="w-full lg:w-1/2 relative overflow-hidden rounded-4xl border-4 border-black shadow-[8px_8px_0px_#000] bg-white group-hover:-translate-y-2 transition-transform duration-500">
                         <div className="w-full aspect-4/3 pointer-events-none">
                             <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                         </div>
                         {/* Period/Identifier Badge */}
-                        <div 
+                        <div
                             className="absolute -top-4 -left-4 text-3xl font-black font-mono w-24 h-24 rounded-full flex items-center justify-center border-4 border-black text-black z-20 shadow-[4px_4px_0px_#000]"
                             style={{ background: '#FAEDCD' }}
                         >
@@ -47,7 +48,7 @@ export default function ProjectCard({ project, index, theme }) {
                                 {project.category}
                             </span>
                         </div>
-                        
+
                         {/* Titles & Desc */}
                         <div className="flex flex-col gap-6">
                             <h3 className="text-5xl md:text-7xl font-black uppercase leading-[1.1] tracking-tighter text-black" style={{ fontFamily: theme?.fontHeading || 'Space Grotesk, sans-serif' }}>

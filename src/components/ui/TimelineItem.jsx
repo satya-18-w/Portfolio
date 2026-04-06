@@ -11,12 +11,12 @@ export default function TimelineItem({ milestone, isEven, index }) {
 
     // Shared Card Design replicating the minimalist orange-tinted screenshot precisely
     const CardContent = () => (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className={`flex flex-col w-full md:w-[420px] rounded-2xl shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] border p-4 sm:p-5 md:p-8 ${isEven ? 'md:ml-auto' : 'md:mr-auto'}`}
+            className={`min-w-0 flex flex-col w-full md:max-w-[420px] rounded-2xl shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] border p-4 sm:p-5 md:p-8 ${isEven ? 'md:ml-auto' : 'md:mr-auto'}`}
             style={{ backgroundColor: theme.bgAlt || '#fff', borderColor: `${theme.primary}33` }}
         >
             <div className="flex flex-col gap-3">
@@ -24,14 +24,30 @@ export default function TimelineItem({ milestone, isEven, index }) {
                 <span className="text-[10px] font-bold tracking-[0.15em] uppercase w-max mb-1" style={{ color: theme.primary }}>
                     {milestone.period}
                 </span>
-                
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: theme.text }}>
+
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight break-words" style={{ color: theme.text }}>
                     {milestone.title}
                 </h3>
-                
-                <p className="text-[13px] md:text-sm leading-relaxed mt-1 mb-4" style={{ color: theme.textMuted }}>
+
+                {milestone.institution && (
+                    <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.08em] break-words" style={{ color: theme.textMuted }}>
+                        {milestone.institution}
+                    </p>
+                )}
+
+                <p className="text-[13px] md:text-sm leading-relaxed mt-1 mb-4 break-words" style={{ color: theme.textMuted }}>
                     {milestone.desc}
                 </p>
+
+                {Array.isArray(milestone.bullets) && milestone.bullets.length > 0 && (
+                    <ul className="mb-4 space-y-1.5">
+                        {milestone.bullets.map((point) => (
+                            <li key={point} className="text-[12px] md:text-[13px] leading-relaxed break-words" style={{ color: theme.textMuted }}>
+                                • {point}
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
                 {/* Solid minimal tags */}
                 <div className="flex flex-wrap gap-2">
@@ -41,6 +57,18 @@ export default function TimelineItem({ milestone, isEven, index }) {
                         </span>
                     ))}
                 </div>
+
+                {milestone.photoUrl && (
+                    <a
+                        href={milestone.photoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.14em] px-3 py-2 rounded-md border w-max transition-transform hover:-translate-y-0.5"
+                        style={{ borderColor: `${theme.primary}55`, color: theme.primary, backgroundColor: `${theme.primary}12` }}
+                    >
+                        View Photos
+                    </a>
+                )}
             </div>
         </motion.div>
     );
@@ -48,7 +76,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
     // Timeline Node (Glowing Dot) exactly aligned
     const TimelineNode = () => (
         <div className="h-full w-full flex align-top justify-center py-8">
-            <motion.div 
+            <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -61,7 +89,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
 
     // Outline Side Icon perfectly aligned to the top edge of the card
     const SideIcon = () => (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, x: isEven ? -10 : 10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -74,14 +102,14 @@ export default function TimelineItem({ milestone, isEven, index }) {
     );
 
     return (
-        <div className="flex flex-col md:grid md:grid-cols-[1fr_48px_1fr] md:gap-4 w-full relative pl-[10px] md:pl-0">
+        <div className="flex flex-col md:grid md:grid-cols-[1fr_48px_1fr] md:gap-4 w-full relative pl-0 md:pl-0">
             {/* Desktop Left / Mobile Hidden if Odd */}
             <div className={`justify-end ${isEven ? 'hidden md:flex' : 'hidden md:flex'}`}>
                 {!isEven ? <CardContent /> : <SideIcon />}
             </div>
 
             {/* Timeline Element (Mobile: fixed left, Desktop: centered column) */}
-            <div className="absolute left-0 top-0 h-full w-12 md:w-auto md:relative md:h-full flex justify-center shrink-0">
+            <div className="absolute left-1 top-0 h-full w-10 md:w-auto md:relative md:h-full flex justify-center shrink-0">
                 <TimelineNode />
             </div>
 
@@ -89,7 +117,7 @@ export default function TimelineItem({ milestone, isEven, index }) {
             <div className={`justify-start flex w-full`}>
                 <div className="w-full">
                     {/* On mobile, ALWAYS show the card regardless of isEven. */}
-                    <div className="block md:hidden pl-[40px] sm:pl-[48px] pt-4">
+                    <div className="block md:hidden pl-[46px] pr-2 pt-4">
                         <CardContent />
                     </div>
                     <div className="hidden md:flex w-full">
