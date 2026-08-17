@@ -178,7 +178,7 @@ function GlowRing({ radius, width, color, speed = 0.3, opacity = 0.12 }) {
 export default function PhotoAvatar({ mousePos }) {
     const groupRef = useRef();
     const { theme } = useTheme();
-    const { texture, aspect } = usePhotoTexture('/images/avatar.png');
+    const { texture, aspect } = usePhotoTexture('/images/avatar.webp');
     const material = useAvatarMaterial(texture, aspect, theme);
 
     useFrame((state) => {

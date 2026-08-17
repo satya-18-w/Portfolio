@@ -300,7 +300,7 @@ function MinimalHero({ theme, role, mousePos }) {
                         <motion.img
                             animate={{ y: [0, -12, 0] }}
                             transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
-                            src="/images/avatar.png"
+                            src="/images/avatar.webp"
                             alt="Satyajit Samal"
                             className="w-full h-auto object-cover relative z-10"
                             style={{
@@ -356,7 +356,7 @@ function TerminalHero({ theme, role, mousePos }) {
                 <motion.img
                     animate={{ y: [0, -20, 0], scale: [1, 1.02, 1] }}
                     transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
-                    src="/images/avatar.png"
+                    src="/images/avatar.webp"
                     alt="Satyajit Samal"
                     className="w-full h-full object-cover lg:object-contain object-center lg:object-right"
                     style={{
@@ -466,7 +466,7 @@ function BasementHero({ theme, role, mousePos }) {
                     <motion.img
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
-                        src="/images/avatar.png"
+                        src="/images/avatar.webp"
                         alt="Satyajit Samal"
                         className="w-full h-full object-cover lg:object-contain object-bottom"
                         style={{

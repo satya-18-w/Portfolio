@@ -166,7 +166,7 @@ export default function AboutSection() {
                                      style={{ background: `linear-gradient(to top, ${theme.bg} 0%, transparent 40%)` }} />
 
                                 <img
-                                    src="/images/avatar.png"
+                                    src="/images/avatar.webp"
                                     alt="Satyajit Samal"
                                     className="w-full h-full object-cover relative z-10 object-top"
                                     style={{

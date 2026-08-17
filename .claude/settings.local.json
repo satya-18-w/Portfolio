@@ -26,7 +26,18 @@
       "Artifact",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173 --max-time 3)",
       "Read(//home/satyajit_samal/.cache/ms-playwright/**)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(node -e ' *)",
+      "Bash(node /tmp/claude-1000/-mnt-c-Users-Satyajit-Samal-OneDrive-Desktop-go-Top-Projects-portfolio/b42986a4-fdde-4e9b-9456-f231b20f74ce/scratchpad/baseline-shots.mjs)",
+      "Bash(cp /tmp/claude-1000/-mnt-c-Users-Satyajit-Samal-OneDrive-Desktop-go-Top-Projects-portfolio/b42986a4-fdde-4e9b-9456-f231b20f74ce/scratchpad/baseline-shots.mjs \"/mnt/c/Users/Satyajit Samal/OneDrive/Desktop/go/Top_Projects/portfolio/.tmp-baseline-shots.mjs\")",
+      "Bash(node .tmp-baseline-shots.mjs)",
+      "Bash(sudo -n true)",
+      "Bash(dpkg -l)",
+      "Bash(ldconfig -p)",
+      "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:5173 --max-time 3)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/ --max-time 5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/metaverse --max-time 5)"
     ]
   }
 }

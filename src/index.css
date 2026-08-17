@@ -9,17 +9,20 @@
 }
 
 :root {
-    --accent-primary: #6366f1;
-    --accent-secondary: #8b5cf6;
-    --accent-highlight: #06b6d4;
-    --bg-dark: #060611;
-    --bg-secondary: #0c0c1d;
-    --bg-card: rgba(15, 15, 35, 0.6);
-    --bg-glass: rgba(15, 15, 35, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    /* Basement — the single supported theme. Values match SKINS.brutalist
+       in ThemeContext.jsx; keep the two in sync until that runtime
+       injection is removed for good. */
+    --accent-primary: #FF4D00;
+    --accent-secondary: #00F5FF;
+    --accent-highlight: #FF006E;
+    --bg-dark: #000000;
+    --bg-secondary: #050505;
+    --bg-card: rgba(255, 255, 255, 0.02);
+    --bg-glass: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.15);
     --text-primary: #ffffff;
-    --text-secondary: #94a3b8;
-    --text-muted: #475569;
+    --text-secondary: #888888;
+    --text-muted: #888888;
 }
 
 *,

@@ -1,7 +1,41 @@
 import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../../../context/ThemeContext';
 import { KEYS } from '../../three/metaverse/CarController';
+
+// Now that /metaverse is a real route (not a theme swap), it needs its own
+// way back — there is no more theme-cycling button to fall back on.
+function ExitLink({ theme }) {
+    return (
+        <Link
+            to="/"
+            style={{
+                position: 'fixed',
+                top: 20,
+                left: 20,
+                zIndex: 50,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '10px 16px',
+                borderRadius: 10,
+                background: 'rgba(3,0,20,0.8)',
+                backdropFilter: 'blur(16px)',
+                border: `1px solid ${theme.primary}30`,
+                fontFamily: theme.fontMono,
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+                color: theme.text,
+                textDecoration: 'none',
+            }}
+        >
+            <span style={{ color: theme.primary }}>←</span> Portfolio
+        </Link>
+    );
+}
 
 // ── Virtual Joystick (mobile touch control) ───────────────────────────
 function VirtualJoystick({ theme }) {
@@ -137,6 +171,7 @@ export default function MetaverseHUD({ speed = 0, nearestDistrict = null }) {
 
     return (
         <>
+            <ExitLink theme={theme} />
             <div style={{
                 position: 'fixed',
                 bottom: 24,

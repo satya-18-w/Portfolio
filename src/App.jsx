@@ -1,11 +1,10 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider, MetaverseThemeProvider } from './context/ThemeContext';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Loader from './components/ui/Loader';
 import Navbar from './components/ui/Navbar';
-import NeonSwitch from './components/ui/NeonSwitch';
 import Footer from './components/ui/Footer';
 import CursorParticles from './components/ui/CursorParticles';
 import CustomCursor from './components/ui/CustomCursor';
@@ -23,8 +22,6 @@ const ProjectDetailPage = lazy(() => import('./components/pages/ProjectDetailPag
 
 function AppContent() {
     const [loading, setLoading] = useState(true);
-    const { themeKey } = useTheme();
-    const isMetaverse = themeKey === 'metaverse';
 
     useSmoothScroll();
 
@@ -44,43 +41,33 @@ function AppContent() {
                     <Route
                         path="/"
                         element={
-                            isMetaverse ? (
-                                <>
-                                    <Suspense fallback={null}>
-                                        <MetaverseWorld />
-                                    </Suspense>
-                                    <NeonSwitch />
-                                </>
-                            ) : (
-                                <>
-                                    <Navbar />
-                                    <ScrollProgress />
-                                    <CursorParticles />
-                                    <CustomCursor />
-                                    <Suspense fallback={null}>
-                                        <HeroSection />
-                                    </Suspense>
-                                    <TechMarquee direction="left" />
-                                    <Suspense fallback={null}>
-                                        <SkillsSection />
-                                    </Suspense>
-                                    <TechMarquee direction="right" />
-                                    <Suspense fallback={null}>
-                                        <AboutSection />
-                                    </Suspense>
-                                    <Suspense fallback={null}>
-                                        <ProjectsSection />
-                                    </Suspense>
-                                    <Suspense fallback={null}>
-                                        <JourneySection />
-                                    </Suspense>
-                                    <Suspense fallback={null}>
-                                        <ContactSection />
-                                    </Suspense>
-                                    <Footer />
-                                    <NeonSwitch />
-                                </>
-                            )
+                            <>
+                                <Navbar />
+                                <ScrollProgress />
+                                <CursorParticles />
+                                <CustomCursor />
+                                <Suspense fallback={null}>
+                                    <HeroSection />
+                                </Suspense>
+                                <TechMarquee direction="left" />
+                                <Suspense fallback={null}>
+                                    <SkillsSection />
+                                </Suspense>
+                                <TechMarquee direction="right" />
+                                <Suspense fallback={null}>
+                                    <AboutSection />
+                                </Suspense>
+                                <Suspense fallback={null}>
+                                    <ProjectsSection />
+                                </Suspense>
+                                <Suspense fallback={null}>
+                                    <JourneySection />
+                                </Suspense>
+                                <Suspense fallback={null}>
+                                    <ContactSection />
+                                </Suspense>
+                                <Footer />
+                            </>
                         }
                     />
                     <Route
@@ -89,6 +76,16 @@ function AppContent() {
                             <Suspense fallback={null}>
                                 <ProjectDetailPage />
                             </Suspense>
+                        }
+                    />
+                    <Route
+                        path="/metaverse"
+                        element={
+                            <MetaverseThemeProvider>
+                                <Suspense fallback={null}>
+                                    <MetaverseWorld />
+                                </Suspense>
+                            </MetaverseThemeProvider>
                         }
                     />
                 </Routes>

@@ -1,16 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Magnetic from '../ui/Magnetic';
-import { useTheme, SKINS } from '../../context/ThemeContext';
+import { useTheme } from '../../context/ThemeContext';
 
 const NAV_LINKS = ['Home', 'About', 'Skills', 'Projects', 'Journey', 'Contact'];
 
 export default function Navbar() {
-    const { theme, themeKey, setThemeKey } = useTheme();
+    const { theme } = useTheme();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [themeOpen, setThemeOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('hero');
-    const panelRef = useRef(null);
 
     // Observe active section
     useEffect(() => {
@@ -22,15 +20,6 @@ export default function Navbar() {
         ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
         return () => obs.disconnect();
     }, []);
-
-    // Close theme panel on outside click
-    useEffect(() => {
-        const handler = (e) => {
-            if (panelRef.current && !panelRef.current.contains(e.target)) setThemeOpen(false);
-        };
-        if (themeOpen) document.addEventListener('mousedown', handler);
-        return () => document.removeEventListener('mousedown', handler);
-    }, [themeOpen]);
 
     const isLight = theme.sectionStyle === 'light';
     const isPop = theme.sectionStyle === 'pop';
@@ -127,106 +116,8 @@ export default function Navbar() {
                     })}
                 </ul>
 
-                {/* Right: theme switcher + CTA */}
-                <div className="flex items-center  gap-4 sm:gap-6" ref={panelRef}>
-                    {/* Theme picker button */}
-                    <div className="relative">
-                        <Magnetic intensity={0.2}>
-                            <button
-                                onClick={() => setThemeOpen(p => !p)}
-                                className="flex items-center gap-1 px-5 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#000] relative"
-                                style={{
-                                    background: isPop ? '#FEFAE0' : theme.surface,
-                                    border: isPop ? '2px solid #000' : `1px solid ${theme.surfaceBorder}`,
-                                    borderRadius: isPop ? '12px' : '12px',
-                                    color: isPop ? '#000' : theme.primary,
-                                    fontFamily: isPop ? theme.fontHeading : theme.fontMono,
-                                    boxShadow: isPop ? '4px 4px 0px #000' : 'none',
-                                }}
-                                title="Switch UI Skin"
-                            >
-                                {/* "New Themes Available" Indicator */}
-                                <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full animate-ping" style={{ background: theme.primary, opacity: 0.6 }} />
-                                <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full" style={{ background: theme.primary, border: isPop ? '1px solid #000' : 'none' }} />
-
-                                <div className="hidden sm:flex flex-col items-start pr-2 border-r" style={{ borderColor: isPop ? '#000' : theme.surfaceBorder }}>
-                                    <span className="text-[8px] leading-none opacity-60 uppercase tracking-widest block mb-0.5" style={{ fontFamily: theme.fontMono }}>Theme</span>
-                                    <span className="leading-none uppercase tracking-widest">{SKINS[themeKey].name}</span>
-                                </div>
-
-                                <div className="flex items-center justify-center gap-1.5 pl-1.5 sm:pl-2">
-                                    <span className="text-base leading-none translate-y-[-1px]">{SKINS[themeKey].emoji}</span>
-                                    <svg className={`w-3 h-3 transition-transform duration-200 opacity-80 group-hover:opacity-100 ${themeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </Magnetic>
-
-                        {/* Theme dropdown panel */}
-                        <AnimatePresence>
-                            {themeOpen && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="absolute right-0 top-12 w-72 rounded-2xl p-3 z-50"
-                                    style={{
-                                        background: isLight ? 'rgba(248,244,240,0.97)' : 'rgba(8,4,28,0.96)',
-                                        backdropFilter: 'blur(24px)',
-                                        border: `1px solid ${theme.surfaceBorder}`,
-                                        boxShadow: `0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px ${theme.primary}15`,
-                                        fontFamily: theme.fontBody,
-                                    }}
-                                >
-                                    <p className="text-[10px] font-bold uppercase tracking-widest mb-3 px-1"
-                                        style={{ color: theme.textMuted, fontFamily: theme.fontMono }}>
-                                        — UI SKIN
-                                    </p>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        {Object.values(SKINS).map(skin => (
-                                            <button
-                                                key={skin.key}
-                                                onClick={() => { setThemeKey(skin.key); setThemeOpen(false); }}
-                                                className="relative flex flex-col gap-2 p-3 rounded-xl text-left transition-all duration-200 hover:scale-[1.02] group"
-                                                style={{
-                                                    background: themeKey === skin.key ? `${skin.primary}18` : 'rgba(255,255,255,0.04)',
-                                                    border: themeKey === skin.key ? `2px solid ${skin.primary}` : '1px solid rgba(255,255,255,0.08)',
-                                                }}
-                                            >
-                                                {/* Preview swatch */}
-                                                <div className="w-full h-10 rounded-lg overflow-hidden flex gap-1"
-                                                    style={{ background: skin.bg }}>
-                                                    <div className="flex-1 h-full" style={{ background: `linear-gradient(135deg, ${skin.bg} 40%, ${skin.primary}50)` }} />
-                                                    <div className="w-3 h-full" style={{ background: skin.primary }} />
-                                                    <div className="w-2 h-full" style={{ background: skin.secondary }} />
-                                                </div>
-                                                <div className="flex items-center justify-between">
-                                                    <div>
-                                                        <p className="text-xs font-bold" style={{ color: skin.text === '#1a1a1a' ? '#1a1a1a' : '#ffffff' }}>
-                                                            {skin.emoji} {skin.name}
-                                                        </p>
-                                                        <p className="text-[9px] opacity-50 font-mono" style={{ color: skin.text === '#1a1a1a' ? '#555' : '#aaa' }}>
-                                                            {skin.cardStyle} · {skin.btnStyle}
-                                                        </p>
-                                                    </div>
-                                                    {themeKey === skin.key && (
-                                                        <div className="w-4 h-4 rounded-full flex items-center justify-center"
-                                                            style={{ background: skin.primary }}>
-                                                            <svg className="w-2.5 h-2.5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                            </svg>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </button>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
+                {/* Right: CTA */}
+                <div className="flex items-center gap-4 sm:gap-6">
                     {/* CTA button */}
                     <Magnetic intensity={0.3}>
                         <a href="#contact"
@@ -276,21 +167,6 @@ export default function Navbar() {
                                 {name}
                             </a>
                         ))}
-                        {/* Mobile theme buttons */}
-                        <div className="grid grid-cols-4 gap-2 pt-3 mt-2" style={{ borderTop: `1px solid ${theme.surfaceBorder}` }}>
-                            {Object.values(SKINS).map(skin => (
-                                <button key={skin.key} onClick={() => { setThemeKey(skin.key); setMobileOpen(false); }}
-                                    className="flex flex-col items-center gap-1 p-2 rounded-xl text-[9px] font-bold transition-all"
-                                    style={{
-                                        background: themeKey === skin.key ? `${skin.primary}20` : 'transparent',
-                                        border: `1px solid ${themeKey === skin.key ? skin.primary : 'transparent'}`,
-                                        color: theme.text,
-                                    }}>
-                                    <span className="text-xl">{skin.emoji}</span>
-                                    {skin.name}
-                                </button>
-                            ))}
-                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
