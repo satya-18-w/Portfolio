@@ -50,7 +50,9 @@
       "Bash(npx lighthouse *)",
       "Bash(node *)",
       "Bash(CHROME_PATH=/home/satyajit_samal/.cache/ms-playwright/chromium-1208/chrome-linux64/chrome npx lighthouse http://localhost:5173/ --output=json --output-path=/tmp/claude-1000/-mnt-c-Users-Satyajit-Samal-OneDrive-Desktop-go-Top-Projects-portfolio/b42986a4-fdde-4e9b-9456-f231b20f74ce/scratchpad/lighthouse-baseline.json --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo --preset=desktop)",
-      "Bash(echo \"grep done, exit $?\")"
+      "Bash(echo \"grep done, exit $?\")",
+      "Bash(rm -f metaverse.md .github/agents/metaverse-builder.agent.md .github/skills/metaverse-world/SKILL.md .github/copilot-instructions.md)",
+      "Bash(rmdir .github/skills/metaverse-world)"
     ]
   }
 }
