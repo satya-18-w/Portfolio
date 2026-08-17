@@ -69,109 +69,38 @@ const SKILLS = [
 ];
 
 // ══════════════════════════════════════════════════════════════════════
-// THEME STYLE MAP — drives all visual differences from a single layout
+// STYLE (Basement)
 // ══════════════════════════════════════════════════════════════════════
-const PLAYGROUND_STYLES = {
-    cyber: {
-        headerTitle: (<>Skills{' '}<span className="inline-block shrink-0 mt-4 px-6 md:px-8 py-2 border-4 border-black rounded-full shadow-[8px_8px_0px_#000] rotate-2 bg-[#FAEDCD] text-wrap">Playground</span></>),
-        subtitle: 'Toss the cards around. Watch them bounce.',
-        subtitleClass: 'text-black text-sm md:text-xl font-bold max-w-xl mx-auto border-2 border-black inline-block px-6 py-2 rounded-full shadow-[4px_4px_0px_#000] bg-white',
-        headingClass: 'text-5xl md:text-7xl lg:text-[7rem] font-black tracking-tighter uppercase leading-[0.85]',
-        sidebarBtnBorder: '4px solid #000',
-        sidebarBtnBgActive: '#E0FBFC',
-        sidebarBtnBgDefault: '#fff',
-        sidebarBtnColor: '#000',
-        sidebarBtnShadowActive: '4px 4px 0px #000',
-        sidebarBtnShadowDefault: '8px 8px 0px #000',
-        sidebarBtnRadius: '9999px',
-        sidebarBtnClass: 'text-sm lg:text-base font-black uppercase tracking-widest',
-        gridBg: '#fff',
-        gridBorder: '4px solid #000',
-        gridShadow: '16px 16px 0px #000',
-        gridRadius: '3rem',
-        gridPattern: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
-        gridPatternSize: '40px 40px',
-        gridPatternOpacity: 0.2,
-    },
-    minimal: {
-        headerTitle: (<>Core <span style={{ color: '#e85d04' }}>Expertise</span></>),
-        subtitle: 'Advanced technical proficiencies across the full engineering stack.',
-        subtitleClass: 'text-sm md:text-base max-w-xl font-medium',
-        headingClass: 'text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter',
-        sidebarBtnBorder: '2px solid rgba(232,93,4,0.18)',
-        sidebarBtnBgActive: '#e85d04',
-        sidebarBtnBgDefault: 'transparent',
-        sidebarBtnColorActive: '#fff',
-        sidebarBtnColor: '#6b6b6b',
-        sidebarBtnShadowActive: 'none',
-        sidebarBtnShadowDefault: 'none',
-        sidebarBtnRadius: '9999px',
-        sidebarBtnClass: 'text-sm font-bold',
-        gridBg: '#f8f4f0',
-        gridBorder: '2px solid rgba(232,93,4,0.18)',
-        gridShadow: '0 4px 20px rgba(0,0,0,0.06)',
-        gridRadius: '2rem',
-        gridPattern: `radial-gradient(circle at 2px 2px, rgba(232,93,4,0.08) 1px, transparent 0)`,
-        gridPatternSize: '24px 24px',
-        gridPatternOpacity: 1,
-    },
-    terminal: {
-        headerTitle: (<><span style={{ color: '#00ff41' }}>$</span> skill_matrix</>),
-        subtitle: 'Scanning neural stack... modules loaded.',
-        subtitleClass: 'text-xs font-mono',
-        headingClass: 'text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter font-mono',
-        sidebarBtnBorder: '1px solid rgba(0,255,65,0.3)',
-        sidebarBtnBgActive: 'rgba(0,255,65,0.15)',
-        sidebarBtnBgDefault: 'transparent',
-        sidebarBtnColorActive: '#00ff41',
-        sidebarBtnColor: '#4caf50',
-        sidebarBtnShadowActive: 'none',
-        sidebarBtnShadowDefault: 'none',
-        sidebarBtnRadius: '0.25rem',
-        sidebarBtnClass: 'text-xs font-mono font-bold',
-        gridBg: 'rgba(0,255,65,0.03)',
-        gridBorder: '1px solid rgba(0,255,65,0.3)',
-        gridShadow: '0 0 30px rgba(0,255,65,0.08)',
-        gridRadius: '1rem',
-        gridPattern: `repeating-linear-gradient(0deg, rgba(0,255,65,0.04) 0px, rgba(0,255,65,0.04) 1px, transparent 1px, transparent 4px)`,
-        gridPatternSize: '100% 100%',
-        gridPatternOpacity: 1,
-    },
-    brutalist: {
-        headerTitle: (<>SKILLS</>),
-        subtitle: 'Core engineering capabilities',
-        subtitleClass: 'text-sm font-mono',
-        headingClass: 'text-5xl md:text-7xl font-black tracking-tighter',
-        sidebarBtnBorder: '1px solid rgba(255,77,0,0.4)',
-        sidebarBtnBgActive: '#FF4D00',
-        sidebarBtnBgDefault: 'transparent',
-        sidebarBtnColorActive: '#000',
-        sidebarBtnColor: '#888',
-        sidebarBtnShadowActive: 'none',
-        sidebarBtnShadowDefault: 'none',
-        sidebarBtnRadius: '0.25rem',
-        sidebarBtnClass: 'text-xs font-bold uppercase tracking-wider font-mono',
-        gridBg: 'rgba(255,255,255,0.02)',
-        gridBorder: '1px solid rgba(255,255,255,0.15)',
-        gridShadow: 'none',
-        gridRadius: '0.25rem',
-        gridPattern: `repeating-linear-gradient(45deg, rgba(255,77,0,0.05) 0px, rgba(255,77,0,0.05) 1px, transparent 1px, transparent 8px)`,
-        gridPatternSize: '100% 100%',
-        gridPatternOpacity: 1,
-    },
+const PLAYGROUND_STYLE = {
+    headerTitle: (<>SKILLS</>),
+    subtitle: 'Core engineering capabilities',
+    subtitleClass: 'text-sm font-mono',
+    headingClass: 'text-5xl md:text-7xl font-black tracking-tighter',
+    sidebarBtnBorder: '1px solid rgba(255,77,0,0.4)',
+    sidebarBtnBgActive: '#FF4D00',
+    sidebarBtnBgDefault: 'transparent',
+    sidebarBtnColorActive: '#000',
+    sidebarBtnColor: '#888',
+    sidebarBtnShadowActive: 'none',
+    sidebarBtnShadowDefault: 'none',
+    sidebarBtnRadius: '0.25rem',
+    sidebarBtnClass: 'text-xs font-bold uppercase tracking-wider font-mono',
+    gridBg: 'rgba(255,255,255,0.02)',
+    gridBorder: '1px solid rgba(255,255,255,0.15)',
+    gridShadow: 'none',
+    gridRadius: '0.25rem',
+    gridPattern: `repeating-linear-gradient(45deg, rgba(255,77,0,0.05) 0px, rgba(255,77,0,0.05) 1px, transparent 1px, transparent 8px)`,
+    gridPatternSize: '100% 100%',
+    gridPatternOpacity: 1,
 };
 
-// ══════════════════════════════════════════════════════════════════════
-// UNIFIED PLAYGROUND — single layout, all themes
-// ══════════════════════════════════════════════════════════════════════
-function UnifiedSkillsPlayground({ theme, themeKey }) {
+function SkillsGrid({ theme }) {
     const [activeCategory, setActiveCategory] = useState('All Skills');
     const filtered = activeCategory === 'All Skills' ? SKILLS : SKILLS.filter(s => s.category === activeCategory);
-    const constraintsRef = useRef(null);
     const sectionRef = useRef(null);
     const headerRef = useRef(null);
 
-    const s = PLAYGROUND_STYLES[themeKey] || PLAYGROUND_STYLES.cyber;
+    const s = PLAYGROUND_STYLE;
 
     useEffect(() => {
         let ctx = gsap.context(() => {
@@ -225,8 +154,8 @@ function UnifiedSkillsPlayground({ theme, themeKey }) {
                         })}
                     </div>
 
-                    {/* Grid/Physics container */}
-                    <div ref={constraintsRef} className="flex-1 relative min-h-[520px] overflow-hidden"
+                    {/* Grid container */}
+                    <div className="flex-1 relative min-h-[520px] overflow-hidden"
                         style={{
                             background: s.gridBg,
                             border: s.gridBorder,
@@ -249,8 +178,6 @@ function UnifiedSkillsPlayground({ theme, themeKey }) {
                                         key={`${skill.name}-${activeCategory}`}
                                         skill={skill}
                                         index={i}
-                                        constraintsRef={constraintsRef}
-                                        activeCategory={activeCategory}
                                     />
                                 ))}
                             </AnimatePresence>
@@ -263,6 +190,6 @@ function UnifiedSkillsPlayground({ theme, themeKey }) {
 }
 
 export default function SkillsSection() {
-    const { theme, themeKey } = useTheme();
-    return <UnifiedSkillsPlayground theme={theme} themeKey={themeKey} />;
+    const { theme } = useTheme();
+    return <SkillsGrid theme={theme} />;
 }
