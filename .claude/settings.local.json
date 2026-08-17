@@ -37,7 +37,20 @@
       "Bash(ldconfig -p)",
       "Bash(curl -s -o /dev/null -w \"dev server: %{http_code}\\\\n\" http://localhost:5173 --max-time 3)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/ --max-time 5)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/metaverse --max-time 5)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/metaverse --max-time 5)",
+      "Bash(git remote *)",
+      "Bash(ssh -T git@github.com -o ConnectTimeout=5)",
+      "Bash(git fetch *)",
+      "Bash(git push *)",
+      "Bash(curl *)",
+      "Bash(pkill -f \"node.*vite\")",
+      "Bash(echo \"grep exit: $?\")",
+      "Bash(rm -f /tmp/claude-1000/-mnt-c-Users-Satyajit-Samal-OneDrive-Desktop-go-Top-Projects-portfolio/b42986a4-fdde-4e9b-9456-f231b20f74ce/scratchpad/vite-dev.log)",
+      "Bash(nohup npm run dev)",
+      "Bash(npx lighthouse *)",
+      "Bash(node *)",
+      "Bash(CHROME_PATH=/home/satyajit_samal/.cache/ms-playwright/chromium-1208/chrome-linux64/chrome npx lighthouse http://localhost:5173/ --output=json --output-path=/tmp/claude-1000/-mnt-c-Users-Satyajit-Samal-OneDrive-Desktop-go-Top-Projects-portfolio/b42986a4-fdde-4e9b-9456-f231b20f74ce/scratchpad/lighthouse-baseline.json --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance,accessibility,best-practices,seo --preset=desktop)",
+      "Bash(echo \"grep done, exit $?\")"
     ]
   }
 }

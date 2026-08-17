@@ -2,10 +2,9 @@ import React, { createContext, useContext } from 'react';
 
 const ThemeContext = createContext();
 
-// Basement is the only theme the main site renders in. `metaverse` is kept
-// only for the standalone /metaverse route, which provides it directly via
-// <ThemeContext.Provider> — see App.jsx — rather than through a switchable
-// themeKey. There is no more theme switching anywhere in the app.
+// Basement is the only theme. There is no theme switching anywhere in the
+// app — SKINS exists as a single-entry object so components that destructure
+// theme.* fields keep working without a wider rewrite.
 export const SKINS = {
     brutalist: {
         key: 'brutalist',
@@ -31,29 +30,6 @@ export const SKINS = {
         sectionStyle: 'dark',
         animationStyle: 'snap',
     },
-    metaverse: {
-        key: 'metaverse',
-        name: 'SatyajitVerse',
-        emoji: '🌆',
-        primary: '#00F5FF',
-        secondary: '#8B5CF6',
-        highlight: '#FF006E',
-        bg: '#030014',
-        bgAlt: '#0a0025',
-        surface: 'rgba(0,245,255,0.05)',
-        surfaceBorder: 'rgba(0,245,255,0.2)',
-        text: '#E0F2FE',
-        textMuted: '#64748B',
-        bodyBg: '#030014',
-        fontHeading: "'Space Grotesk', sans-serif",
-        fontBody: "'Inter', sans-serif",
-        fontMono: "'JetBrains Mono', monospace",
-        cardStyle: 'glow',
-        headingStyle: 'neon',
-        btnStyle: 'glow',
-        sectionStyle: 'immersive',
-        animationStyle: 'physics',
-    },
 };
 
 // Basement's values now live as static tokens in index.css :root — no more
@@ -62,17 +38,6 @@ export const SKINS = {
 export function ThemeProvider({ children }) {
     return (
         <ThemeContext.Provider value={{ theme: SKINS.brutalist, themeKey: 'brutalist', SKINS }}>
-            {children}
-        </ThemeContext.Provider>
-    );
-}
-
-// Used only by the standalone /metaverse route (see App.jsx) to give its
-// component tree the metaverse palette without reintroducing app-wide
-// theme switching.
-export function MetaverseThemeProvider({ children }) {
-    return (
-        <ThemeContext.Provider value={{ theme: SKINS.metaverse, themeKey: 'metaverse', SKINS }}>
             {children}
         </ThemeContext.Provider>
     );
