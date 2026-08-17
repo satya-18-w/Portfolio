@@ -1,8 +1,32 @@
 {
-    "env": {
-        "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
-        "ANTHROPIC_AUTH_TOKEN": "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",
-        "ANTHROPIC_API_KEY": "",
-        "ANTHROPIC_MODEL": "nvidia/nemotron-3-super-120b-a12b:free"
-    }
+  "permissions": {
+    "allow": [
+      "Bash(echo \"exit: $?\")",
+      "Bash(git --git-dir=.git --work-tree=. status)",
+      "Bash(powershell.exe *)",
+      "Bash(git fsck *)",
+      "Bash(gh repo *)",
+      "Bash(git read-tree *)",
+      "Bash(git status *)",
+      "Bash(perl -0ne 'print \"$1\\\\0\" if /^ D \\(.*\\)$/')",
+      "Bash(git checkout *)",
+      "Bash(python3 -c ' *)",
+      "Bash(xargs -I{} sh -c 'echo \"--{}--\"; cat \"{}\"')",
+      "Bash(npm -v)",
+      "Bash(claude mcp *)",
+      "Bash(npm view *)",
+      "Bash(npm ls *)",
+      "Bash(grep -E \"^vite$\")",
+      "Bash(npm install *)",
+      "Bash(timeout 20 npm run dev)",
+      "Bash(npm run *)",
+      "Bash(disown)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173 --max-time 5)",
+      "Bash(npx playwright *)",
+      "Artifact",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173 --max-time 3)",
+      "Read(//home/satyajit_samal/.cache/ms-playwright/**)",
+      "Bash(git add *)"
+    ]
+  }
 }

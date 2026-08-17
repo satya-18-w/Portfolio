@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index, theme }) {
 
                         {/* Tech Stack */}
                         <div className="flex flex-wrap gap-4 pt-8 border-t-4 border-black/10">
-                            {project.tech.map(t => (
+                            {project.techStack.map(t => (
                                 <span key={t} className="px-6 py-3 text-sm md:text-base font-black font-mono leading-none rounded-full border-4 border-black shadow-[4px_4px_0px_#000] bg-white hover:-translate-y-1 transition-transform inline-block text-black">
                                     {t}
                                 </span>
