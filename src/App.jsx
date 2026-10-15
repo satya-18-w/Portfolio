@@ -1,11 +1,10 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Loader from './components/ui/Loader';
 import Navbar from './components/ui/Navbar';
-import NeonSwitch from './components/ui/NeonSwitch';
 import Footer from './components/ui/Footer';
 import CursorParticles from './components/ui/CursorParticles';
 import CustomCursor from './components/ui/CustomCursor';
@@ -18,13 +17,10 @@ const ProjectsSection = lazy(() => import('./components/sections/ProjectsSection
 const JourneySection = lazy(() => import('./components/sections/JourneySection'));
 const AboutSection = lazy(() => import('./components/sections/AboutSection'));
 const ContactSection = lazy(() => import('./components/sections/ContactSection'));
-const MetaverseWorld = lazy(() => import('./components/three/metaverse/MetaverseWorld'));
 const ProjectDetailPage = lazy(() => import('./components/pages/ProjectDetailPage'));
 
 function AppContent() {
     const [loading, setLoading] = useState(true);
-    const { themeKey } = useTheme();
-    const isMetaverse = themeKey === 'metaverse';
 
     useSmoothScroll();
 
@@ -44,14 +40,6 @@ function AppContent() {
                     <Route
                         path="/"
                         element={
-                            isMetaverse ? (
-                                <>
-                                    <Suspense fallback={null}>
-                                        <MetaverseWorld />
-                                    </Suspense>
-                                    <NeonSwitch />
-                                </>
-                            ) : (
                                 <>
                                     <Navbar />
                                     <ScrollProgress />
@@ -78,9 +66,7 @@ function AppContent() {
                                         <ContactSection />
                                     </Suspense>
                                     <Footer />
-                                    <NeonSwitch />
                                 </>
-                            )
                         }
                     />
                     <Route

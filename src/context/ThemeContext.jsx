@@ -2,81 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 const ThemeContext = createContext();
 
-// Each theme is a COMPLETE UI skin — not just colors
+// Single skin: Basement (black + orange). Kept as a context so sections read tokens from one place.
 export const SKINS = {
-    cyber: {
-        key: 'cyber',
-        name: 'Pop-Brutalism',
-        emoji: '🥊',
-        // ToyFight signature pastel palette
-        primary: '#E2D1F9', // Lavender pill
-        secondary: '#FEFAE0', // Pale yellow pill
-        highlight: '#FAEDCD', // Peach pill
-        bg: '#EFEDE7', // Warm Cream (ToyFight base)
-        bgAlt: '#E8E4D9',
-        surface: '#FFFFFF',
-        surfaceBorder: 'rgba(0,0,0,0.1)',
-        text: '#000000', // Heavy black text
-        textMuted: '#555555',
-        // UI characteristics
-        bodyBg: '#EFEDE7',
-        fontHeading: "'Space Grotesk', sans-serif",
-        fontBody: "'Inter', sans-serif",
-        fontMono: "'JetBrains Mono', monospace", // Using JetBrains as the retro/pixel contrast
-        cardStyle: 'solid',
-        headingStyle: 'solid',
-        btnStyle: 'pill',
-        sectionStyle: 'light',
-        animationStyle: 'snap',
-    },
-    minimal: {
-        key: 'minimal',
-        name: 'Minimal',
-        emoji: '◎',
-        // Warm light palette — exactly Stitch orange pages
-        primary: '#e85d04',
-        secondary: '#f48c06',
-        highlight: '#faa307',
-        bg: '#f8f4f0',
-        bgAlt: '#f0ebe4',
-        surface: 'rgba(232,93,4,0.06)',
-        surfaceBorder: 'rgba(232,93,4,0.18)',
-        text: '#1a1a1a',
-        textMuted: '#6b6b6b',
-        bodyBg: '#f8f4f0',
-        fontHeading: "'Space Grotesk', sans-serif",
-        fontBody: "'Inter', sans-serif",
-        fontMono: "'JetBrains Mono', monospace",
-        cardStyle: 'outline',
-        headingStyle: 'solid',
-        btnStyle: 'pill',
-        sectionStyle: 'light',
-        animationStyle: 'snap',
-    },
-    terminal: {
-        key: 'terminal',
-        name: 'Terminal',
-        emoji: '▶',
-        // Matrix green on black
-        primary: '#00ff41',
-        secondary: '#39ff14',
-        highlight: '#7fff00',
-        bg: '#000000',
-        bgAlt: '#0a0a0a',
-        surface: 'rgba(0,255,65,0.05)',
-        surfaceBorder: 'rgba(0,255,65,0.2)',
-        text: '#e0ffe0',
-        textMuted: '#4caf50',
-        bodyBg: '#000000',
-        fontHeading: "'JetBrains Mono', monospace",
-        fontBody: "'JetBrains Mono', monospace",
-        fontMono: "'JetBrains Mono', monospace",
-        cardStyle: 'outline',
-        headingStyle: 'solid',
-        btnStyle: 'sharp',
-        sectionStyle: 'terminal',
-        animationStyle: 'glitch',
-    },
     brutalist: {
         key: 'brutalist',
         name: 'Basement',
@@ -101,40 +28,11 @@ export const SKINS = {
         sectionStyle: 'dark',
         animationStyle: 'snap',
     },
-    metaverse: {
-        key: 'metaverse',
-        name: 'SatyajitVerse',
-        emoji: '🌆',
-        primary: '#00F5FF',
-        secondary: '#8B5CF6',
-        highlight: '#FF006E',
-        bg: '#030014',
-        bgAlt: '#0a0025',
-        surface: 'rgba(0,245,255,0.05)',
-        surfaceBorder: 'rgba(0,245,255,0.2)',
-        text: '#E0F2FE',
-        textMuted: '#64748B',
-        bodyBg: '#030014',
-        fontHeading: "'Space Grotesk', sans-serif",
-        fontBody: "'Inter', sans-serif",
-        fontMono: "'JetBrains Mono', monospace",
-        cardStyle: 'glow',
-        headingStyle: 'neon',
-        btnStyle: 'glow',
-        sectionStyle: 'immersive',
-        animationStyle: 'physics',
-    },
 };
 
 export function ThemeProvider({ children }) {
-    const [themeKey, setThemeKey] = useState('brutalist');
+    const themeKey = 'brutalist';
     const theme = SKINS[themeKey];
-
-    const cycleTheme = () => {
-        const keys = Object.keys(SKINS);
-        const idx = keys.indexOf(themeKey);
-        setThemeKey(keys[(idx + 1) % keys.length]);
-    };
 
     React.useEffect(() => {
         // Apply CSS vars AND body class for full-skin transitions
@@ -158,7 +56,7 @@ export function ThemeProvider({ children }) {
     }, [theme, themeKey]);
 
     return (
-        <ThemeContext.Provider value={{ theme, themeKey, cycleTheme, setThemeKey, SKINS, THEMES: SKINS }}>
+        <ThemeContext.Provider value={{ theme, themeKey, SKINS }}>
             {children}
         </ThemeContext.Provider>
     );
