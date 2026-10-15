@@ -13,9 +13,9 @@ const TECH_ITEMS = [
 ];
 
 export default function TechMarquee({ direction = 'left' }) {
-    const { theme, themeKey } = useTheme();
+    const { theme } = useTheme();
 
-    const sep = themeKey === 'terminal' ? ' // ' : ' · ';
+    const sep = ' · ';
     const line = TECH_ITEMS.join(sep) + sep;
     const doubled = line + line + line;
 
@@ -25,10 +25,7 @@ export default function TechMarquee({ direction = 'left' }) {
 
     return (
         <div className="w-full overflow-hidden py-5 border-y select-none"
-            style={{
-                borderColor: themeKey === 'cyber' ? '#00000015' : (theme.surfaceBorder || `${theme.primary}15`),
-                background: themeKey === 'cyber' ? 'rgba(0,0,0,0.02)' : 'transparent',
-            }}
+            style={{ borderColor: theme.surfaceBorder, background: 'transparent' }}
         >
             <motion.div
                 className="whitespace-nowrap"

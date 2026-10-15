@@ -7,7 +7,7 @@ import { useTheme } from '../../context/ThemeContext';
  * Features: rubber-band spring physics, 3D tilt on hover, momentum, elastic snap-back.
  */
 export default function SkillCard({ skill, index, constraintsRef, activeCategory }) {
-    const { theme, themeKey } = useTheme();
+    const { theme } = useTheme();
     const cardRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -36,54 +36,6 @@ export default function SkillCard({ skill, index, constraintsRef, activeCategory
 
     // ─── THEME STYLE MAP ────────────────────────────────
     const CARD_STYLES = {
-        cyber: {
-            bg: '#FFFFFF',
-            border: '3px solid #000000',
-            shadow: '5px 5px 0px #000000',
-            dragShadow: '12px 12px 0px rgba(0,0,0,0.9)',
-            hoverShadow: '8px 8px 0px #000000',
-            radius: '20px',
-            hoverBg: ['#E2D1F9', '#FEFAE0', '#FAEDCD', '#E0FBFC'][index % 4],
-            nameColor: '#000000',
-            nameFont: 'font-black uppercase tracking-widest',
-            nameSize: 'text-[11px]',
-            iconSize: 'text-3xl',
-            barColor: '#000000',
-            barBg: 'rgba(0,0,0,0.1)',
-            levelColor: '#000000',
-        },
-        minimal: {
-            bg: '#FFFFFF',
-            border: '1.5px solid rgba(232,93,4,0.15)',
-            shadow: '0 2px 12px rgba(0,0,0,0.04)',
-            dragShadow: '0 20px 40px rgba(232,93,4,0.2)',
-            hoverShadow: '0 8px 24px rgba(232,93,4,0.1)',
-            radius: '16px',
-            hoverBg: 'rgba(232,93,4,0.06)',
-            nameColor: theme.text,
-            nameFont: 'font-semibold',
-            nameSize: 'text-xs',
-            iconSize: 'text-2xl',
-            barColor: '#e85d04',
-            barBg: 'rgba(232,93,4,0.12)',
-            levelColor: '#e85d04',
-        },
-        terminal: {
-            bg: 'rgba(0,255,65,0.02)',
-            border: '1px solid rgba(0,255,65,0.2)',
-            shadow: '0 0 8px rgba(0,255,65,0.06)',
-            dragShadow: '0 0 30px rgba(0,255,65,0.3), 0 0 60px rgba(0,255,65,0.1)',
-            hoverShadow: '0 0 20px rgba(0,255,65,0.15)',
-            radius: '8px',
-            hoverBg: 'rgba(0,255,65,0.06)',
-            nameColor: '#00ff41',
-            nameFont: 'font-bold font-mono uppercase',
-            nameSize: 'text-[10px]',
-            iconSize: 'text-xl',
-            barColor: '#00ff41',
-            barBg: 'rgba(0,255,65,0.1)',
-            levelColor: '#00ff41',
-        },
         brutalist: {
             bg: 'rgba(255,255,255,0.015)',
             border: '1px solid rgba(255,255,255,0.1)',
@@ -102,7 +54,7 @@ export default function SkillCard({ skill, index, constraintsRef, activeCategory
         },
     };
 
-    const s = CARD_STYLES[themeKey] || CARD_STYLES.cyber;
+    const s = CARD_STYLES.brutalist;
 
     return (
         <motion.div
@@ -148,7 +100,7 @@ export default function SkillCard({ skill, index, constraintsRef, activeCategory
                 borderRadius: s.radius,
                 boxShadow: s.shadow,
                 padding: '20px 16px',
-                minHeight: themeKey === 'cyber' ? '160px' : '140px',
+                minHeight: '140px',
                 height: 'auto',
                 transformStyle: 'preserve-3d',
                 perspective: '800px',

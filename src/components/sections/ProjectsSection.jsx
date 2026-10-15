@@ -11,8 +11,7 @@ const UPCOMING = [
 ];
 
 export default function ProjectsSection() {
-    const { theme, themeKey } = useTheme();
-    const isTerminal = themeKey === 'terminal';
+    const { theme } = useTheme();
 
     return (
         <SectionWrapper id="projects" style={{ background: theme.bg, color: theme.text }}>
@@ -93,7 +92,7 @@ export default function ProjectsSection() {
                                         </span>
                                         <Link to={`/project/${p.slug}`}
                                             className="px-4 py-2 text-xs font-black uppercase tracking-wider rounded-md transition-colors"
-                                            style={{ background: theme.primary, color: isTerminal ? '#000' : '#050505' }}>
+                                            style={{ background: theme.primary, color: '#050505' }}>
                                             Details
                                         </Link>
                                     </div>

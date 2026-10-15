@@ -50,7 +50,7 @@ function StatNumber({ value, label, delay = 0 }) {
 
 // ── CoderGyan Inspired 2-Column Layout ───────────────────────────────
 export default function AboutSection() {
-    const { theme, themeKey } = useTheme();
+    const { theme } = useTheme();
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
     
@@ -58,14 +58,7 @@ export default function AboutSection() {
     const avatarY = useTransform(scrollYProgress, [0, 1], [50, -50]);
     const glowY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
-    // Theme adapters for the "Introducing" text
-    const STYLES = {
-        cyber: { font: "'Inter', sans-serif", accent: 'italic bg-white text-black px-2' },
-        minimal: { font: "'Georgia', serif", accent: 'italic text-[#e85d04]' },
-        terminal: { font: "'JetBrains Mono', monospace", accent: 'font-bold text-[#00ff41]' },
-        brutalist: { font: "'JetBrains Mono', monospace", accent: 'border border-[#FF4D00] text-[#FF4D00] px-2 py-1 text-[10px] uppercase tracking-widest' }
-    };
-    const s = STYLES[themeKey] || STYLES.cyber;
+    const s = { font: "'JetBrains Mono', monospace", accent: 'border border-[#FF4D00] text-[#FF4D00] px-2 py-1 text-[10px] uppercase tracking-widest' };
 
     return (
         <SectionWrapper id="about" ref={containerRef} className="w-full flex items-center justify-center relative overflow-hidden min-h-[90vh]">
@@ -88,8 +81,8 @@ export default function AboutSection() {
                             viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6 }}
                             className="mb-8"
                         >
-                            <span className={s.accent} style={{ fontFamily: s.font, fontSize: themeKey === 'brutalist' ? '12px' : '20px' }}>
-                                {themeKey === 'terminal' ? '// Introducing the architect' : 'Introducing your engineer'}
+                            <span className={s.accent} style={{ fontFamily: s.font, fontSize: '12px' }}>
+                                Introducing your engineer
                             </span>
                         </motion.div>
 
@@ -153,13 +146,7 @@ export default function AboutSection() {
                             className="relative z-10 w-[85%] max-w-[450px]"
                         >
                             <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden" 
-                                 style={{ 
-                                     border: themeKey === 'cyber' ? '4px solid #000' : 
-                                            themeKey === 'brutalist' ? `2px solid ${theme.text}` : 
-                                            `1px solid ${theme.primary}40`,
-                                     boxShadow: themeKey === 'cyber' ? '16px 16px 0px #000' : 'none',
-                                     background: themeKey === 'terminal' ? 'rgba(0,255,65,0.05)' : 'transparent'
-                                 }}>
+                                 style={{ border: `2px solid ${theme.text}`, background: 'transparent' }}>
                                 
                                 {/* Inner gradient overlay */}
                                 <div className="absolute inset-0 z-20 pointer-events-none" 
@@ -169,10 +156,7 @@ export default function AboutSection() {
                                     src="/images/avatar.png"
                                     alt="Satyajit Samal"
                                     className="w-full h-full object-cover relative z-10 object-top"
-                                    style={{
-                                        filter: themeKey === 'terminal' ? 'grayscale(100%) sepia(100%) hue-rotate(80deg) saturate(300%) contrast(1.2)' :
-                                                themeKey === 'brutalist' ? 'grayscale(100%) contrast(1.2)' : 'contrast(1.1)'
-                                    }}
+                                    style={{ filter: 'grayscale(100%) contrast(1.2)' }}
                                 />
                             </div>
 
